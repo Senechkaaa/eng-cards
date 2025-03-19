@@ -1,0 +1,15 @@
+.container_text {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    align-self: flex-start;
+
+    .btn + .btn {
+        margin-left: 20px;
+    }
+
+    .text {
+        font-size: 24px;
+        color: #2e3856;
+    }
+}

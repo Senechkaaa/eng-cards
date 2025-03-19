@@ -1,0 +1,10 @@
+port: "8080"
+hashSalt: "dDShnaodfm23_jd$$DN1maZZzx1J"
+signingKey: "Fp1$d3Ap_7G_1_yBv1_pQ$"
+db:
+  username: "postgres"
+  host: "localhost"
+  port: "5432"
+  dbname: "postgres"
+  sslmode: "disable"
+  password: "1$3n_uUjdLL1_9$_9HkqQj1$_1"
