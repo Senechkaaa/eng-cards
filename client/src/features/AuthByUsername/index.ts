@@ -1,3 +1,3 @@
-export * from './ui/Form'
-export * from './model/slice/loginSlice'
-export * from './model/services/authService'
+export * from './ui/Form/Form';
+export * from './model/slice/loginSlice';
+export * from './model/services/authService';

@@ -10,10 +10,13 @@
         "font-weight-notation": "numeric",
         "comment-whitespace-inside": "always",
         "comment-empty-line-before": "always",
+        "no-invalid-double-slash-comments": null,
         "rule-empty-line-before": "always",
-
-        "selector-class-pattern": ["/[a-zA-Z]+(?:_[a-zA-Z]+)*/", {
-            "message": "snake_case expected"
-        }]
+        "selector-class-pattern": [
+            "^[a-z]+(?:_[a-z]+)*$",
+            {
+                "message": "snake_case expected"
+            }
+        ]
     }
 }

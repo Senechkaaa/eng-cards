@@ -1,1 +1,1 @@
-export const ACCESS_TOKEN_LOCALSTORAGE_KEY = 'token'
+export const TOKEN_LOCALSTORAGE_KEY = 'token'

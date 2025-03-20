@@ -1,58 +1,41 @@
 .Button {
     margin: 10px;
-    color: white;
     border-radius: 8px;
     font-weight: 700;
     cursor: pointer;
-
-    &.outlined {
-        background-color: transparent;
-        color: #586380;
-        border: 2px solid #e8eaf0;
-        transition: all 0.3s;
-
-        &:hover {
-            background-color: #e8eaf0;
-        }
-    }
-
-    .visible {
-        h3 {
-            color: purple;
-        }
-    }
+    border: none;
 
     &.none {
+        color: var(--secondary-color);
         margin: 0;
-        border: none;
         background-color: transparent;
     }
 
     &.filled {
-        border: none;
+        background-color: var(--btn-filled-bg);
+        color: #fff;
     }
 
-    // &.sm {
+    &.outlined {
+        color: var(--secondary-color);
+        background-color: transparent;
+        border: 2px solid var(--primary-color);
+        transition: all 0.3s;
 
-    // }
+        &:hover {
+            background-color: var(--primary-color);
+        }
+    }
 
-    // &.m {
-
-    // }
-
-    // &.l {
-
-    // }
-
-    &.smP {
+    &.sm_p {
         padding: 10px 7px;
     }
 
-    &.mP {
+    &.m_p {
         padding: 12px 9px;
     }
 
-    &.lP {
+    &.l_p {
         font-size: 18px;
         padding: 17px 11px;
     }
