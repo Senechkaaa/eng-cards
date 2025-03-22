@@ -1,7 +1,6 @@
 .Button {
     margin: 10px;
     border-radius: 8px;
-    font-weight: 700;
     cursor: pointer;
     border: none;
 
@@ -36,7 +35,18 @@
     }
 
     &.l_p {
-        font-size: 18px;
         padding: 17px 11px;
+    }
+
+    &.m {
+        font: var(--font-m);
+    }
+
+    &.l {
+        font: var(--font-l);
+    }
+
+    &.xl {
+        font: var(--font-xl);
     }
 }

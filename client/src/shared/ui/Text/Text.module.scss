@@ -1,8 +1,38 @@
-.title, .text, .label{
-    color: #2E3856;
+.title,
+.text,
+.label {
+    color: var(--secondary-color);
     font-weight: 500;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.error {
+    color: red;
 }
 
 .bold {
     font-weight: 700;
+}
+
+.s {
+    font: var(--font-s);
+}
+
+.m {
+    font: var(--font-m);
+}
+
+.l {
+    font: var(--font-l);
 }

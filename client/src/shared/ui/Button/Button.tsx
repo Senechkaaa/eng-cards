@@ -1,13 +1,13 @@
-import { ButtonHTMLAttributes, FC, ReactNode } from 'react';
+import { ButtonHTMLAttributes, FC, memo, ReactNode } from 'react';
 import cl from './Button.module.scss';
 import { classNames, Mods } from '@shared/lib/classNames/classNames';
 
 type ButtonVariant = 'none' | 'outlined' | 'filled';
-type ButtonSize = 'sm' | 'm' | 'l';
+type ButtonSize = 'm' | 'l' | 'xl';
 type ButtonPadding = 'sm_p' | 'm_p' | 'l_p';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    classname?: string;
+    className?: string;
     children: ReactNode;
     variant?: ButtonVariant;
     size?: ButtonSize;
@@ -16,16 +16,18 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     padding?: ButtonPadding;
 }
 
-export const Button: FC<ButtonProps> = (props) => {
+export const Button = memo((props: ButtonProps) => {
     const {
+        type = 'button',
         children,
         variant = 'outlined',
-        size = 'sm',
+        size = 'm',
         disabled,
         square,
         className,
         padding = 'l_p',
         onClick,
+        ...otherProps
     } = props;
 
     const mods: Mods = {
@@ -38,12 +40,13 @@ export const Button: FC<ButtonProps> = (props) => {
 
     return (
         <button
+            type={type}
             onClick={onClick}
-            type='button'
             className={classNames(cl.Button, mods, [className])}
             disabled={disabled}
+            {...otherProps}
         >
             {children}
         </button>
     );
-};
+});

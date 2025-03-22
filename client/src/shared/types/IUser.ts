@@ -8,5 +8,5 @@ export interface UserData {
 
 export interface IUser {
     data: UserData,
-    
+
 }

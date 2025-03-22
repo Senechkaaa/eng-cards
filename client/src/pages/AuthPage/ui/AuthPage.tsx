@@ -1,9 +1,9 @@
-import { Form } from '@features/AuthByUsername';
+import { LoginForm } from '@features/AuthByUsername';
 
 const AuthPage = () => {
     return (
         <div>
-            <Form />
+            <LoginForm/>
         </div>
     );
 };

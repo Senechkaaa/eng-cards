@@ -1,6 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
-    --primary-color: #f6f7fb;
+    --font-family-main: Montserrat, serif;
+    --font-weight-bold: 700;
+    --font-weight-sbold: 600;
+    --font-weight-medium: 500;
+
+    // s
+    --font-size-s: 12px;
+    --font-line-s: 20px;
+    --font-s: var(--font-weight-bold) var(--font-size-s) / var(--font-line-s)
+        var(--font-family-main);
+    // m
+    --font-size-m: 16px;
+    --font-line-m: 24px;
+    --font-m: var(--font-weight-medium) var(--font-size-m) / var(--font-line-m)
+        var(--font-family-main);
+
+    // l
+    --font-size-l: 24px;
+    --font-line-l: 32px;
+    --font-l: var(--font-weight-sbold) var(--font-size-l) / var(--font-line-l)
+        var(--font-family-main);
+
+    // xl
+    --font-size-xl: 32px;
+    --font-line-xl: 40px;
+    --font-xl: var(--font-weight-bold) var(--font-size-xl) / var(--font-line-xl)
+        var(--font-family-main);
+
+    --primary-color: #d9dde8;
     --secondary-color: #586380;
     --btn-filled-bg: #423ed8;
-    // #2E3856
 }
