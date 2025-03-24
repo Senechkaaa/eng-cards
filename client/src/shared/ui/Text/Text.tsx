@@ -11,7 +11,7 @@ const mapSizeToHeadTag: Record<TextSize, HeaderTagType> = {
     l: 'h1',
 };
 
-export type TextTheme = 'error';
+export type TextTheme = 'error' | 'gray';
 
 interface TextProps {
     text?: string;

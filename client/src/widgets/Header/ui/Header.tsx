@@ -1,9 +1,9 @@
 import { Button } from '@shared/ui/Button';
 import cl from './Header.module.scss';
-import { Routes } from '@shared/config/routeConfig/routeConfig';
 import { Link } from 'react-router-dom';
 import { LangSwitcher } from '@widgets/LangSwitcher/ui/LangSwitcher';
 import { useTranslation } from 'react-i18next';
+import { Routes } from '@shared/const/router';
 
 export const Header = () => {
     const { t } = useTranslation();
@@ -24,7 +24,7 @@ export const Header = () => {
             </div>
             <div>
                 <Link to={Routes.AUTH}>
-                    <Button className={cl.btn} variant='filled' padding='mP'>
+                    <Button className={cl.btn} variant='filled' padding='m_p'>
                         {t('Войти')}
                     </Button>
                 </Link>

@@ -8,6 +8,7 @@
       "strict": true,
       "isolatedModules": true,
       "allowImportingTsExtensions": true,
+      "types": ["vite/client", "vite-plugin-svgr/client"],
       "noEmit": true,
       "moduleResolution": "bundler",
       "useDefineForClassFields": true,
@@ -23,14 +24,14 @@
       "downlevelIteration": true,
       "baseUrl": "./",
       "paths": {
-        "@app/*": ["./src/app/*"],
-        "@pages/*": ["./src/pages/*"],
-        "@widgets/*": ["./src/widgets/*"],
-        "@features/*": ["./src/features/*"],
-        "@entities/*": ["./src/entities/*"],
-        "@shared/*": ["./src/shared/*"],
-    },
-    "typeRoots": ["./node_modules/@types"]
+          "@app/*": ["./src/app/*"],
+          "@pages/*": ["./src/pages/*"],
+          "@widgets/*": ["./src/widgets/*"],
+          "@features/*": ["./src/features/*"],
+          "@entities/*": ["./src/entities/*"],
+          "@shared/*": ["./src/shared/*"]
+      },
+      "typeRoots": ["./node_modules/@types"]
   },
   "include": ["src", "vite.config.ts"]
 }

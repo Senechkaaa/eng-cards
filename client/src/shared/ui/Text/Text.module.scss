@@ -18,7 +18,11 @@
 }
 
 .error {
-    color: red;
+    color: var(--red-color-err);
+}
+
+.gray {
+    color: var(--gray-color);
 }
 
 .bold {

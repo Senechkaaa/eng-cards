@@ -1,4 +1,4 @@
-import { ValidationAuthSchemaType } from '@shared/types/ValidationAuthSchemaType';
+import { ValidationAuthSchemaType } from '../types/ValidationAuthSchema';
 import { z, ZodType } from 'zod';
 
 export type TypeErrorName = z.infer<typeof validationAuthSchema>;

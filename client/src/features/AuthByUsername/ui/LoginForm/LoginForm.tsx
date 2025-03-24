@@ -2,19 +2,23 @@ import { useCallback, useState } from 'react';
 import cl from './LoginForm.module.scss';
 import { Button } from '@shared/ui/Button';
 import { useLoginMutation, useRegistrationMutation } from '../../model/services/authService';
-import { classNames } from '@shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { validationAuthSchema } from '@shared/const/schemes/validationAuthSchema';
-import { ValidationAuthSchemaType } from '@shared/types/ValidationAuthSchemaType';
+import { validationAuthSchema } from '../../model/consts/validationAuthSchema';
+import { ValidationAuthSchemaType } from '../../model/types/ValidationAuthSchema';
 import { Input } from '@shared/ui/Input';
+import { AuthHeaderButtons } from '../AuthHeaderButtons/AuthHeaderButtons';
+import { Text } from '@shared/ui/Text';
+import { useNavigate } from 'react-router-dom';
+import { Routes } from '@shared/const/router';
 
 export const LoginForm = () => {
     const [isLoginForm, setIsLoginForm] = useState(false);
     const [login] = useLoginMutation();
     const [registration] = useRegistrationMutation();
     const { t } = useTranslation('auth');
+    const navigate = useNavigate()
 
     const {
         register,
@@ -36,35 +40,6 @@ export const LoginForm = () => {
             registration({ email, username, password });
         },
         [registration],
-    );
-
-    const content = (
-        <>
-            <div>
-                <Button
-                    size='xl'
-                    variant='none'
-                    className={classNames('', { [cl.visible]: !isLoginForm }, [])}
-                    onClick={() => setIsLoginForm(false)}
-                >
-                    {t('Зарегестрироваться')}
-                </Button>
-
-                <Button
-                    size='xl'
-                    className={classNames('', { [cl.visible]: isLoginForm }, [])}
-                    variant='none'
-                    onClick={() => setIsLoginForm(true)}
-                >
-                    {t('Вход')}
-                </Button>
-            </div>
-            <Button>{t('Войти через Google')}</Button>
-            <Button>{t('Войти через Facebook')}</Button>
-            <div className={cl.divider}>
-                <span className={cl.divider_title}>{t('или адрес эл. почты')}</span>
-            </div>
-        </>
     );
 
     const contentWithEmailAndPasswordInputs = (
@@ -95,6 +70,7 @@ export const LoginForm = () => {
                     } else {
                         onRegistration(data.email, data.username, data.password);
                     }
+                    navigate(Routes.CARDS)
                 })}
                 className={cl.cont}
             >
@@ -103,9 +79,13 @@ export const LoginForm = () => {
                         className={cl.img}
                         src='https://assets.quizlet.com/_next/static/media/QZ_Auth_LightV2@2x.82052a10.png'
                     />
+                    <Text />
                 </div>
                 <div className={cl.right}>
-                    {content}
+                    <AuthHeaderButtons
+                        setIsLoginForm={setIsLoginForm}
+                        isLoginForm={isLoginForm}
+                    />
                     <div>
                         {!isLoginForm ? (
                             <>
@@ -141,7 +121,6 @@ export const LoginForm = () => {
                         </>
                     ) : (
                         <>
-                            <input type='submit' />
                             <Button type='submit' variant='filled'>
                                 {t('Зарегистрироваться')}
                             </Button>

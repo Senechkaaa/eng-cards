@@ -1,3 +1,3 @@
-export { LoginForm } from './ui/Form/LoginForm';
+export { LoginForm } from './ui/LoginForm/LoginForm';
 export * from './model/slice/loginSlice';
 export * from './model/services/authService';

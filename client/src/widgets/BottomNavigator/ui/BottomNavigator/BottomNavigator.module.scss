@@ -1,0 +1,11 @@
+.BottomNavigator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    background: #fff;
+    padding: 5px 0;
+}

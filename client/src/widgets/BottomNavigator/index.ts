@@ -1,0 +1,1 @@
+export {BottomNavigator} from './ui/BottomNavigator/BottomNavigator'
