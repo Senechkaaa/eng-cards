@@ -1,8 +1,10 @@
-.HeaderToolbar {
+.header_toolbar {
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 2px solid var(--light-gray-color);
+    z-index: var(--sliding-drawer-z-index);
 }
 
 .lang_switcher {

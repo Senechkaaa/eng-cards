@@ -1,0 +1,17 @@
+.Overlay {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    z-index: var(--overlay-z-index);
+    background: var(--overaly-bg);
+    backdrop-filter: blur(2px);
+    transition: none !important;
+    opacity: 1;
+
+    &.closed {
+        opacity: 0;
+    }
+}

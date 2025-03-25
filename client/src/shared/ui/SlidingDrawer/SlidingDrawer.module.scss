@@ -1,11 +1,32 @@
 .SlidingMenu {
     position: absolute;
-    top: 50px;
-    right: 0;
+    top: var(--header-toolbar-height);
     left: 0;
-    width: 500px;
-    background: red;
+    height: calc(100% - var(--header-toolbar-height));
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+     transform: translateY(-100%);
+    transition: transform 200ms ease-in-out;
+
+    &.opened {
+        transform: translateY(0);
+    }
+
+    &.closed {
+         transform: translateY(-100%);
+    }
+
+    .content {
+        z-index: var(--sliding-drawer-z-index);
+        position: absolute;
+        top: 0;
+        width: 100%;
+        padding: 20px 0;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }

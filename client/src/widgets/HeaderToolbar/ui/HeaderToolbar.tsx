@@ -1,7 +1,6 @@
 import { classNames } from '@shared/lib/classNames/classNames';
 import cls from './HeaderToolbar.module.scss';
-import { useTranslation } from 'react-i18next';
-import { memo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { IconSwitcher } from '@shared/ui/IconSwitcher/IconSwitcher';
 import PalleteIcon from '@shared/assets/icons/palette.svg';
 import PalleteFilledIcon from '@shared/assets/icons/palette-filled.svg';
@@ -14,18 +13,26 @@ interface HeaderToolbarProps {
     className?: string;
 }
 
-type Item = 'pallete' | 'statistics'
+type Item = 'pallete' | 'statistics';
 
 export const HeaderToolbar = memo(({ className }: HeaderToolbarProps) => {
-    const { t } = useTranslation();
     const [selectedItem, setSelectedItem] = useState<Item>();
+    const [isShowDrawer, setIsShowDrawer] = useState(false);
+
+    const onCloseDrawer = useCallback(() => {
+        setIsShowDrawer(false);
+    }, []);
+
+    const onShowDrawer = useCallback(() => {
+        setIsShowDrawer(true);
+    }, []);
 
     const handleSelected = (item: Item) => {
-        setSelectedItem(item)
+        setSelectedItem(item);
     };
 
     return (
-        <div className={classNames(cls.HeaderToolbar, {}, [className])}>
+        <div className={classNames(cls.header_toolbar, {}, [className])}>
             <IconSwitcher
                 onClick={() => handleSelected('pallete')}
                 Icon={PalleteIcon}
@@ -40,7 +47,8 @@ export const HeaderToolbar = memo(({ className }: HeaderToolbarProps) => {
                 SelectedIcon={StatisticsFilledIcon}
                 isSelected={selectedItem === 'statistics'}
             />
-            <SlidingDrawer>
+            <button onClick={onShowDrawer}>Click</button>
+            <SlidingDrawer animationDelay={300} isOpen={isShowDrawer} onClose={onCloseDrawer}>
                 <h2>fdksfds</h2>
                 <div>fddfdsf</div>
             </SlidingDrawer>

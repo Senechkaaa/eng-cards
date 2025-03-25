@@ -34,5 +34,14 @@
     --btn-filled-bg: #423ed8;
     --red-color-err: #d01919d0;
     --gray-color: #0f0f0f;
-    --bg-primary-color: #F3F9FF;
+    --light-gray-color: #f8e7ee;
+    --bg-primary-color: #f3f9ff;
+    --overaly-bg: #00000022;
+    
+    // height
+    --header-toolbar-height: 83px;
+
+    // z-index
+    --overlay-z-index: 10;
+    --sliding-drawer-z-index: 100;
 }
