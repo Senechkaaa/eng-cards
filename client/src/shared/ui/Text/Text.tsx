@@ -11,7 +11,8 @@ const mapSizeToHeadTag: Record<TextSize, HeaderTagType> = {
     l: 'h1',
 };
 
-export type TextTheme = 'error' | 'gray';
+export type TextTheme = 'error' | 'gray' | 'blue' | 'yellow' | 'green';
+export type TextAlign = 'left' | 'right' | 'center';
 
 interface TextProps {
     text?: string;
@@ -20,7 +21,7 @@ interface TextProps {
     size?: TextSize;
     className?: string;
     bold?: boolean;
-    align?: 'left' | 'right' | 'center';
+    align?: TextAlign;
     theme?: TextTheme;
 }
 

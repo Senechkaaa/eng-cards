@@ -1,3 +1,3 @@
-import { CardsPageAsync } from "./ui/CardsPage.async"
+import { CardsPageAsync } from "./ui/CardsPage/CardsPage.async"
 
 export {CardsPageAsync as CardsPage}

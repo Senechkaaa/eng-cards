@@ -9,10 +9,11 @@ interface SlidingDrawerProps {
     children: ReactNode;
     isOpen?: boolean;
     onClose?: () => void;
+    lazy?: boolean
 }
 
 export const SlidingDrawer = memo((props: SlidingDrawerProps) => {
-    const { className, children, isOpen, onClose } = props;
+    const { className, children, isOpen, onClose, lazy } = props;
     const [isClosing, setIsClosing] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
     const close = useCallback(() => {
@@ -34,14 +35,14 @@ export const SlidingDrawer = memo((props: SlidingDrawerProps) => {
         [cls.opened]: isOpen,
     };
 
-    if (!isMounted) {
+    if (!isMounted && lazy) {
+        console.log('возвращаю null');
         return null;
     }
 
     const contentClick = (e: React.MouseEvent) => {
         e.stopPropagation();
     };
-    console.log('isOpen:', isOpen, 'isClosing:', isClosing, 'mods:', mods);
 
     return (
         <Portal>

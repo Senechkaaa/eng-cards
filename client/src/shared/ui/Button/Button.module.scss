@@ -10,7 +10,7 @@
     }
 
     &.filled {
-        background-color: var(--btn-filled-bg);
+        background-color: var(--light-blue);
         color: #fff;
     }
 
@@ -23,6 +23,23 @@
         &:hover {
             background-color: var(--btn-outlined-bg);
         }
+    }
+
+    &.circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        background-color: var(--light-blue);
+        border-radius: 50%;
+    }
+
+    &.basic {
+        display: flex;
+        justify-content: flex-start;
+        background-color: #fff;
+        border: 1px solid var(--light-gray-color);
     }
 
     &.sm_p {
@@ -47,5 +64,13 @@
 
     &.xl {
         font: var(--font-xl);
+    }
+
+    &.shadow {
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        transition: box-shadow 0.3s ease;
+        &:hover {
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+        }
     }
 }

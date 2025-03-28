@@ -5,10 +5,12 @@ import { ComponentType } from 'react';
 import { ProfilePage } from '@pages/ProfilePage';
 import { LibraryPage } from '@pages/LibraryPage';
 import { Routes } from '@shared/const/router';
+import { CreatePage } from '@pages/CreatePage';
 
 export interface IRoutes {
     path: string;
     element: ComponentType;
+    hideBottomNavigator?: boolean
 }
 
 export const publicRoutes: IRoutes[] = [
@@ -34,5 +36,10 @@ export const privateRoutes: IRoutes[] = [
     {
         path: Routes.LIBRARY,
         element: LibraryPage,
+    },
+    {
+        path: Routes.CREATE,
+        element: CreatePage,
+        hideBottomNavigator: true,
     },
 ];
