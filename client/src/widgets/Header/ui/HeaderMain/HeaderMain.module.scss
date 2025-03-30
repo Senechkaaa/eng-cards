@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    align-items: center;
+
+    ul {
+        display: flex;
+        align-content: center;
+    }
+
+    li {
+        margin-left: 20px;
+        list-style: none;
+    }
+}
+
+.btn {
+    background: blue;
+}

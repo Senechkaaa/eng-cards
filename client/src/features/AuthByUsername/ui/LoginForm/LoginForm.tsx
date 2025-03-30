@@ -18,7 +18,7 @@ export const LoginForm = () => {
     const [login] = useLoginMutation();
     const [registration] = useRegistrationMutation();
     const { t } = useTranslation('auth');
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const {
         register,
@@ -44,14 +44,14 @@ export const LoginForm = () => {
 
     const contentWithEmailAndPasswordInputs = (
         <>
-            <Input
+            <Input<ValidationAuthSchemaType>
                 label={t('Эл. почта')}
                 placeholder='user@gmail.com'
                 errorName='email'
                 register={register}
                 errors={errors}
             />
-            <Input
+            <Input<ValidationAuthSchemaType>
                 label={t('Пароль')}
                 placeholder='12345'
                 errorName='password'
@@ -70,7 +70,7 @@ export const LoginForm = () => {
                     } else {
                         onRegistration(data.email, data.username, data.password);
                     }
-                    navigate(Routes.CARDS)
+                    navigate(Routes.CARDS);
                 })}
                 className={cl.cont}
             >
@@ -82,14 +82,11 @@ export const LoginForm = () => {
                     <Text />
                 </div>
                 <div className={cl.right}>
-                    <AuthHeaderButtons
-                        setIsLoginForm={setIsLoginForm}
-                        isLoginForm={isLoginForm}
-                    />
+                    <AuthHeaderButtons setIsLoginForm={setIsLoginForm} isLoginForm={isLoginForm} />
                     <div>
                         {!isLoginForm ? (
                             <>
-                                <Input
+                                <Input<ValidationAuthSchemaType>
                                     label={t('Имя пользователя')}
                                     placeholder='user123'
                                     errorName='username'
@@ -97,7 +94,7 @@ export const LoginForm = () => {
                                     errors={errors}
                                 />
                                 {contentWithEmailAndPasswordInputs}
-                                <Input
+                                <Input<ValidationAuthSchemaType>
                                     label={t('Повторите пароль')}
                                     placeholder='12345'
                                     errorName='confirmPassword'

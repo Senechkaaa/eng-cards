@@ -1,16 +1,22 @@
-import { Button } from '@shared/ui/Button';
-import cl from './Header.module.scss';
-import { Link } from 'react-router-dom';
-import { LangSwitcher } from '@widgets/LangSwitcher/ui/LangSwitcher';
+import { classNames } from '@shared/lib/classNames/classNames';
+import cls from './HeaderMain.module.scss';
 import { useTranslation } from 'react-i18next';
+import { memo } from 'react';
+import { LangSwitcher } from '@widgets/LangSwitcher/ui/LangSwitcher';
+import { Link } from 'react-router-dom';
+import { Button } from '@shared/ui/Button';
 import { Routes } from '@shared/const/router';
 
-export const Header = () => {
+interface HeaderMainProps {
+    className?: string;
+}
+
+export const HeaderMain = memo(({ className }: HeaderMainProps) => {
     const { t } = useTranslation();
 
     return (
-        <header className={cl.header}>
-            <div className={cl.container}>
+        <div className={classNames(cls.HeaderMain, {}, [className])}>
+            <div className={cls.container}>
                 <LangSwitcher />
                 <div>logo</div>
                 <ul>
@@ -24,11 +30,11 @@ export const Header = () => {
             </div>
             <div>
                 <Link to={Routes.AUTH}>
-                    <Button className={cl.btn} variant='filled' padding='m_p'>
+                    <Button className={cls.btn} variant='filled' padding='m_p'>
                         {t('Войти')}
                     </Button>
                 </Link>
             </div>
-        </header>
+        </div>
     );
-};
+});

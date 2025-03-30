@@ -1,9 +1,5 @@
-import { Header } from "@widgets/Header"
-
 const HomePage = () => {
-    return <div>
-        <Header/>
-    </div>
-}
+    return <div>HomePage</div>;
+};
 
-export default HomePage
+export default HomePage;

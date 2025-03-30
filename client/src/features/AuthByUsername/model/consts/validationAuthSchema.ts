@@ -1,7 +1,7 @@
 import { ValidationAuthSchemaType } from '../types/ValidationAuthSchema';
 import { z, ZodType } from 'zod';
 
-export type TypeErrorName = z.infer<typeof validationAuthSchema>;
+export type TypeErrorNameAuth = z.infer<typeof validationAuthSchema>;
 
 export const validationAuthSchema: ZodType<ValidationAuthSchemaType> = z
     .object({

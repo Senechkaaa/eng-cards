@@ -31,7 +31,7 @@ export const HeaderCards = memo(({ className }: HeaderCardsProps) => {
     );
 
     return (
-        <div className={classNames(cls.header_toolbar, {}, [className])}>
+        <div className={classNames(cls.header_cards, {}, [className])}>
             <IconSwitcher
                 onClick={() =>
                     onChangeDrawer({

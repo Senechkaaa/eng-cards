@@ -14,7 +14,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     disabled?: boolean;
     square?: boolean;
     padding?: ButtonPadding;
-    shadow?: boolean
+    shadow?: boolean;
 }
 
 export const Button = memo((props: ButtonProps) => {
@@ -26,7 +26,7 @@ export const Button = memo((props: ButtonProps) => {
         disabled,
         square,
         className,
-        padding = 'l_p',
+        padding = 'sm_p',
         onClick,
         shadow,
         ...otherProps
@@ -38,7 +38,7 @@ export const Button = memo((props: ButtonProps) => {
         [cl[variant]]: true,
         [cl[size]]: size,
         [cl[padding]]: padding,
-        [cl.shadow]: shadow
+        [cl.shadow]: shadow,
     };
 
     return (

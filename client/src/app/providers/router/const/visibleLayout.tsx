@@ -1,6 +1,5 @@
 import { BottomNavigator } from '@widgets/BottomNavigator';
 import { Header } from '@widgets/Header';
-import { HeaderCards } from '@widgets/HeaderToolbar';
 import { ReactNode } from 'react';
 
 export interface VisibleLayoutProps {
@@ -13,7 +12,7 @@ export interface VisibleLayoutProps {
 
 export const visibleLayout: VisibleLayoutProps = {
     '/': {
-        header: <Header />,
+        header: <Header headerType='main' />,
         bottomNavigator: null,
     },
     '/auth': {
@@ -21,7 +20,7 @@ export const visibleLayout: VisibleLayoutProps = {
         bottomNavigator: null,
     },
     '/cards': {
-        header: <HeaderCards />,
+        header: <Header headerType='cards' />,
         bottomNavigator: <BottomNavigator />,
     },
     '/profile': {
@@ -29,11 +28,11 @@ export const visibleLayout: VisibleLayoutProps = {
         bottomNavigator: <BottomNavigator />,
     },
     '/library': {
-        header: <HeaderCards />,
+        header: <Header headerType='library' />,
         bottomNavigator: <BottomNavigator />,
     },
     '/cards/create': {
-        header: null,
+        header: <Header headerType='create'/>,
         bottomNavigator: null,
     },
 };

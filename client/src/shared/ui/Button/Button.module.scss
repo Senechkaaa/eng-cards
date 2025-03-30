@@ -7,6 +7,7 @@
         color: var(--secondary-color);
         margin: 0;
         background-color: transparent;
+        padding: 0;
     }
 
     &.filled {
@@ -69,6 +70,7 @@
     &.shadow {
         box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
         transition: box-shadow 0.3s ease;
+
         &:hover {
             box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
         }

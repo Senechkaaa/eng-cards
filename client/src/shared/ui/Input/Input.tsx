@@ -1,27 +1,26 @@
 import { classNames, Mods } from '../../lib/classNames/classNames';
-import { ChangeEvent, FC, InputHTMLAttributes, useState } from 'react';
+import { ChangeEvent, FocusEventHandler, InputHTMLAttributes, useState } from 'react';
 import cl from './Input.module.scss';
 import { Text } from '../Text';
-import { TypeErrorName } from '../../const/schemes/validationAuthSchema';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { ValidationAuthSchemaType } from '../../types/ValidationAuthSchemaType';
-
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import { Path } from 'react-hook-form';
 type InputSize = 'sm' | 'm' | 'l';
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'size'>;
-
-export interface InputProps extends HTMLInputProps {
+type InputVariant = 'basic' | 'ghost';
+export interface InputProps<T extends FieldValues> extends HTMLInputProps {
     className?: string;
     value?: string | number;
     label?: string;
     onChange?: (value: string) => void;
     size?: InputSize;
-    errorName?: keyof TypeErrorName;
-    register?: UseFormRegister<ValidationAuthSchemaType>;
-    errors?: FieldErrors<ValidationAuthSchemaType>;
+    errorName?: Path<T>;
+    register?: UseFormRegister<T>;
+    errors?: FieldErrors<T>;
+    variant?: InputVariant;
 }
 
-export const Input: FC<InputProps> = (props) => {
+export const Input = <T extends FieldValues>(props: InputProps<T>) => {
     const [isFocused, setFocus] = useState(false);
     const {
         className,
@@ -33,11 +32,13 @@ export const Input: FC<InputProps> = (props) => {
         errorName,
         register,
         errors,
+        variant = 'ghost',
         ...otherProps
     } = props;
 
     const mods: Mods = {
         [cl.focused]: isFocused,
+        [cl[variant]]: true,
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,35 +53,43 @@ export const Input: FC<InputProps> = (props) => {
         setFocus(true);
     };
 
-    if (register && errors && errorName) {
-        return (
-            <>
-                {label && <Text size='s' label={label} bold />}
-                {errors[errorName]?.message && <Text theme='error' size='m' title={errors[errorName]?.message} bold/>}
-                <input
-                    placeholder={placeholder}
-                    className={classNames(cl.input, mods, [className, cl[size]])}
-                    {...otherProps}
-                    {...register(errorName)}
-                />
-            </>
-        );
-    }
-
-    if (value && onChange) {
-        return (
-            <>
-                <input
-                    onBlur={onBlur}
-                    onFocus={onFocus}
-                    value={value}
-                    placeholder={placeholder}
-                    onChange={onChangeHandler}
-                    className={classNames(cl.input, mods, [className, cl[size]])}
-                    {...otherProps}
-                />
-                {label && <Text label={label} bold />}
-            </>
-        );
-    }
+    return (
+        <>
+            {label && <Text size='s' label={label} bold />}
+            {register && errors && errorName ? (
+                <>
+                    {errors[errorName]?.message && (
+                        <Text
+                            theme='error'
+                            size='m'
+                            title={String(errors[errorName]?.message)}
+                            bold
+                        />
+                    )}
+                    <input
+                        onFocus={onFocus}
+                        placeholder={placeholder}
+                        className={classNames(cl.input, mods, [className, cl[size]])}
+                        {...otherProps}
+                        {...register(errorName, {
+                            onBlur: onBlur,
+                        })}
+                    />
+                </>
+            ) : (
+                <>
+                    <input
+                        onBlur={onBlur}
+                        onFocus={onFocus}
+                        value={value}
+                        placeholder={placeholder}
+                        onChange={onChangeHandler}
+                        className={classNames(cl.input, mods, [className, cl[size]])}
+                        {...otherProps}
+                    />
+                    {label && <Text label={label} bold />}
+                </>
+            )}
+        </>
+    );
 };
