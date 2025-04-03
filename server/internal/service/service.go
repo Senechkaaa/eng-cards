@@ -8,16 +8,15 @@ import (
 )
 
 type Authorization interface {
-	CreateUser(user cards.User) (cards.User, error)
-	GenerateTokens(user cards.User) (string, string, error)
+	CreateUser(user cards.User) (string, error)
+	GenerateTokens(username, email string, userId string) (string, string, error)
 	Parse(accessToken string) (*auth.UserClaims, error)
 	GetUserById(userId string) (cards.User, error)
 	GetUserByEmail(user cards.User) (cards.User, error)
-	GetAllUsers() ([]cards.User, error)
 }
 
 type TokenManager interface {
-	GenerateTokens(user cards.User) (string, string, error)
+	GenerateTokens(username, email string, userId string) (string, string, error)
 	Parse(accessToken string) (*auth.UserClaims, error)
 }
 
@@ -25,6 +24,7 @@ type Cards interface {
 	CreateDeck(userId string) (string, error)
 	CreateCard(card cards.Card, deckId string) (string, error)
 	GetDeckIdByUserId(userId string) (string, error)
+	GetCardByDeckId(deckId string) ([]cards.Card, error)
 }
 
 type Service struct {

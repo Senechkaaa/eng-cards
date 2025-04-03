@@ -3,8 +3,8 @@ package auth
 import (
 	"errors"
 	"fmt"
-	cards "github.com/Senechkaaa/engcards"
 	"github.com/golang-jwt/jwt"
+	"log"
 	"time"
 )
 
@@ -13,17 +13,12 @@ type Manager struct {
 }
 
 type UserClaims struct {
-	Id            string `json:"uid"`
-	Email         string `json:"email"`
-	Username      string `json:"username"`
-	Password_Hash string `json:"password"`
+	Id       string `json:"uid"`
+	Email    string `json:"email"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 	jwt.StandardClaims
 }
-
-//type TokenManager interface {
-//	GenerateTokens(user cards.User) (string, string, error)
-//	Parse(accessToken string) (*UserClaims, error)
-//}
 
 func NewManager(signingKey string) (*Manager, error) {
 	if signingKey == "" {
@@ -33,26 +28,25 @@ func NewManager(signingKey string) (*Manager, error) {
 	return &Manager{signingKey: signingKey}, nil
 }
 
-func (m *Manager) GenerateTokens(user cards.User) (string, string, error) {
+func (m *Manager) GenerateTokens(username, email string, userId string) (string, string, error) {
 
-	claims := &UserClaims{
-		Id:            user.ID,
-		Email:         user.Email,
-		Username:      user.Username,
-		Password_Hash: user.PasswordHash,
+	accessClaims := &UserClaims{
+		Id:       userId,
+		Email:    email,
+		Username: username,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Local().Add(time.Second * time.Duration(15)).Unix(),
+			ExpiresAt: time.Now().Local().Add(time.Minute * time.Duration(15)).Unix(),
 		},
 	}
 
 	refreshClaims := &UserClaims{
-		Id: user.ID,
+		Id: userId,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Local().Add(time.Hour * time.Duration(168)).Unix(),
 		},
 	}
 
-	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString([]byte(m.signingKey))
+	accessToken, err := jwt.NewWithClaims(jwt.SigningMethodHS256, accessClaims).SignedString([]byte(m.signingKey))
 
 	if err != nil {
 		return "", "", fmt.Errorf("failed to create access token: %w", err)
@@ -64,11 +58,11 @@ func (m *Manager) GenerateTokens(user cards.User) (string, string, error) {
 		return "", "", fmt.Errorf("failed to create refresh token: %w", err)
 	}
 
-	return token, refreshToken, err
+	return accessToken, refreshToken, err
 }
 
-func (m *Manager) Parse(accessToken string) (*UserClaims, error) {
-	token, err := jwt.ParseWithClaims(accessToken, &UserClaims{}, func(token *jwt.Token) (interface{}, error) {
+func (m *Manager) Parse(token string) (*UserClaims, error) {
+	tokenParse, err := jwt.ParseWithClaims(token, &UserClaims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
@@ -76,11 +70,12 @@ func (m *Manager) Parse(accessToken string) (*UserClaims, error) {
 		return []byte(m.signingKey), nil
 	})
 	if err != nil {
+		log.Println("Parse error:", err)
 		return nil, errors.New("failed to parse token")
 	}
 
-	claims, ok := token.Claims.(*UserClaims)
-	if !ok || !token.Valid {
+	claims, ok := tokenParse.Claims.(*UserClaims)
+	if !ok || !tokenParse.Valid {
 		return nil, errors.New("token claims are not of type")
 	}
 

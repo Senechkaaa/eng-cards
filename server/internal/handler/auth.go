@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	cards "github.com/Senechkaaa/engcards"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -20,13 +19,13 @@ func (h *Handler) signUp(c *gin.Context) {
 		return
 	}
 
-	user, err := h.services.CreateUser(input)
+	userId, err := h.services.CreateUser(input)
 	if err != nil {
 		newErrorResponce(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	accessToken, refreshToken, err := h.services.GenerateTokens(user)
+	accessToken, refreshToken, err := h.services.GenerateTokens(input.Username, input.Email, userId)
 	if err != nil {
 		newErrorResponce(c, http.StatusInternalServerError, "Failed to generate tokens")
 		return
@@ -34,9 +33,7 @@ func (h *Handler) signUp(c *gin.Context) {
 
 	c.SetCookie("refresh_token", refreshToken, 7200, "/", "localhost", false, true)
 
-	fmt.Println("userId", user.ID)
-	fmt.Println(user)
-	deckId, err := h.services.CreateDeck(user.ID)
+	_, err = h.services.CreateDeck(user.ID)
 	if err != nil {
 		newErrorResponce(c, http.StatusInternalServerError, err.Error())
 		return
@@ -45,8 +42,13 @@ func (h *Handler) signUp(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"access_token":  accessToken,
 		"refresh_token": refreshToken,
-		"user":          user,
-		"deskId":        deckId,
+		//"user": cards.User{
+		//	ID:       user.ID,
+		//	Email:    user.Email,
+		//	Username: user.Username,
+		//	UserType: user.UserType,
+		//	Time:     user.Time,
+		//},
 	})
 }
 

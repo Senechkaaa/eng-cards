@@ -6,17 +6,17 @@ import (
 )
 
 type Authorization interface {
-	CreateUser(user cards.User) (cards.User, error)
+	CreateUser(user cards.User) (string, error)
+	GetUser(username, email, password string) (cards.User, error)
 	FindUserById(userId string) (cards.User, error)
 	FindUserByEmail(user cards.User) (cards.User, error)
-	GetAllUsers() ([]cards.User, error)
 }
 
 type Cards interface {
 	CreateDeck(userId string) (string, error)
 	CreateCard(card cards.Card, deckId string) (string, error)
 	GetDeckIdByUserId(userId string) (string, error)
-	GetCardByDeckId(deckId string) (cards.Card, error)
+	GetCardByDeckId(deckId string) ([]cards.Card, error)
 }
 
 type Repository struct {

@@ -24,3 +24,7 @@ func (s *CardsService) CreateDeck(userId string) (string, error) {
 func (s *CardsService) GetDeckIdByUserId(userId string) (string, error) {
 	return s.repo.GetDeckIdByUserId(userId)
 }
+
+func (s *CardsService) GetCardByDeckId(deckId string) ([]cards.Card, error) {
+	return s.repo.GetCardByDeckId(deckId)
+}

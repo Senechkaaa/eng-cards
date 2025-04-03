@@ -33,7 +33,8 @@ func (h *Handler) InitRoutes(tokenManager *auth.Manager) *gin.Engine {
 	{
 		cards := api.Group("/cards")
 		{
-			cards.POST("create", h.createCard)
+			cards.POST("/", h.createCard)
+			cards.GET("/", h.getCard)
 		}
 	}
 	return router
