@@ -12,12 +12,21 @@ type Authorization interface {
 	GetAllUsers() ([]cards.User, error)
 }
 
+type Cards interface {
+	CreateDeck(userId string) (string, error)
+	CreateCard(card cards.Card, deckId string) (string, error)
+	GetDeckIdByUserId(userId string) (string, error)
+	GetCardByDeckId(deckId string) (cards.Card, error)
+}
+
 type Repository struct {
 	Authorization
+	Cards
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Authorization: NewAuthPostgres(db),
+		Cards:         NewCardsPostgres(db),
 	}
 }

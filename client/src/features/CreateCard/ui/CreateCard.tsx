@@ -1,19 +1,15 @@
-import { classNames } from '@shared/lib/classNames/classNames';
+import { classNames, Mods } from '@shared/lib/classNames/classNames';
 import cls from './CreateCard.module.scss';
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { Input } from '@shared/ui/Input';
 import { Button } from '@shared/ui/Button';
-import { useSelector } from 'react-redux';
-import { getCreateCardExample } from '../model/selectors/getCreateCardState';
-import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch';
-import { createCardActions } from '../model/slice/createCardsSlice';
 import { useForm } from 'react-hook-form';
 import { ValidationCreateCardSchemaType } from '../model/types/ValidationCreateCardSchemaType';
-import {
-    validationCreateCardSchema,
-} from '../model/consts/validationCreateCardSchema';
+import { validationCreateCardSchema } from '../model/consts/validationCreateCardSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Text } from '@shared/ui/Text';
+import CheckMark from '@shared/assets/icons/check-mark.svg';
 
 interface CreateCardProps {
     className?: string;
@@ -21,32 +17,47 @@ interface CreateCardProps {
 
 export const CreateCard = memo(({ className }: CreateCardProps) => {
     const { t } = useTranslation();
-    const example = useSelector(getCreateCardExample);
-    const dispatch = useAppDispatch();
-
-    const onChangeExample = useCallback(
-        (value: string) => {
-            dispatch(createCardActions.setExample(value));
-        },
-        [dispatch],
-    );
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [isClosing, setIsClosing] = useState(false);
 
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm({
         resolver: zodResolver<ValidationCreateCardSchemaType>(validationCreateCardSchema),
     });
 
+    const mods: Mods = {
+        [cls.isSuccess]: isSuccess,
+        [cls.isRemoved]: isClosing,
+    };
+
+    const handleSuccess = useCallback(
+        (data: ValidationCreateCardSchemaType) => {
+            console.log(data);
+            reset();
+            setIsSuccess(true);
+            setTimeout(() => {
+                setIsClosing(true);
+                setTimeout(() => {
+                    setIsSuccess(false);
+                    setIsClosing(false);
+                }, 400);
+            }, 2000);
+        },
+        [reset],
+    );
+
     return (
         <form
-            onSubmit={handleSubmit((data) => {
-                console.log(data);
-            })}
+            onSubmit={handleSubmit((data) => handleSuccess(data))}
             className={classNames(cls.CreateCard, {}, [className])}
         >
             <Input<ValidationCreateCardSchemaType>
+                autoComplete='off'
+                classNameWrapper={cls.input}
                 variant='basic'
                 register={register}
                 errors={errors}
@@ -54,19 +65,30 @@ export const CreateCard = memo(({ className }: CreateCardProps) => {
                 placeholder='Английский'
             />
             <Input<ValidationCreateCardSchemaType>
+                autoComplete='off'
+                classNameWrapper={cls.input}
                 variant='basic'
                 register={register}
                 errors={errors}
                 errorName='ruWord'
                 placeholder={t('Русский')}
             />
-            <Input
-            variant='basic'
-                onChange={onChangeExample}
-                value={example}
+            <Input<ValidationCreateCardSchemaType>
+                autoComplete='off'
+                classNameWrapper={cls.input}
+                variant='basic'
+                register={register}
+                errors={errors}
+                errorName='example'
                 placeholder={t('Пример использования')}
             />
-            <Button>{t('Сохранить')}</Button>
+            {isSuccess && (
+                <div className={classNames(cls.success, mods, [])}>
+                    <CheckMark />
+                    <Text className={cls.title} title={t('Карточка была добавлена')} size='s' />
+                </div>
+            )}
+            <Button type='submit'>{t('Сохранить')}</Button>
         </form>
     );
 });

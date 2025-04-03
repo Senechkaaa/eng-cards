@@ -21,8 +21,15 @@ type TokenManager interface {
 	Parse(accessToken string) (*auth.UserClaims, error)
 }
 
+type Cards interface {
+	CreateDeck(userId string) (string, error)
+	CreateCard(card cards.Card, deckId string) (string, error)
+	GetDeckIdByUserId(userId string) (string, error)
+}
+
 type Service struct {
 	Authorization
+	Cards
 }
 
 type Deps struct {
@@ -32,5 +39,8 @@ type Deps struct {
 }
 
 func NewService(deps Deps) *Service {
-	return &Service{Authorization: NewAuthService(deps.Repos, deps.Hash, deps.TokenManager)}
+	return &Service{
+		Authorization: NewAuthService(deps.Repos, deps.Hash, deps.TokenManager),
+		Cards:         NewCardsService(deps.Repos),
+	}
 }

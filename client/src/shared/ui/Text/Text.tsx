@@ -16,7 +16,6 @@ export type TextAlign = 'left' | 'right' | 'center';
 
 interface TextProps {
     text?: string;
-    label?: string;
     title?: string;
     size?: TextSize;
     className?: string;
@@ -29,7 +28,6 @@ export const Text: FC<TextProps> = (props) => {
     const {
         text,
         size = 'm',
-        label,
         title,
         bold,
         className,
@@ -52,11 +50,6 @@ export const Text: FC<TextProps> = (props) => {
             )}
             {text && (
                 <p className={classNames(cl.title, { [cl.bold]: bold }, [className])}>{text}</p>
-            )}
-            {label && (
-                <span className={classNames(cl.title, { [cl.bold]: bold }, [className])}>
-                    {label}
-                </span>
             )}
         </>
     );

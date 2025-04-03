@@ -9,7 +9,6 @@ import (
 
 func (h *Handler) signUp(c *gin.Context) {
 	var input cards.User
-
 	if err := c.BindJSON(&input); err != nil {
 		newErrorResponce(c, http.StatusBadRequest, err.Error())
 		return
@@ -26,13 +25,20 @@ func (h *Handler) signUp(c *gin.Context) {
 		newErrorResponce(c, http.StatusInternalServerError, err.Error())
 		return
 	}
+
 	accessToken, refreshToken, err := h.services.GenerateTokens(user)
-	fmt.Println(user)
+	if err != nil {
+		newErrorResponce(c, http.StatusInternalServerError, "Failed to generate tokens")
+		return
+	}
 
 	c.SetCookie("refresh_token", refreshToken, 7200, "/", "localhost", false, true)
 
+	fmt.Println("userId", user.ID)
+	fmt.Println(user)
+	deckId, err := h.services.CreateDeck(user.ID)
 	if err != nil {
-		newErrorResponce(c, http.StatusInternalServerError, "Failed to generate tokens")
+		newErrorResponce(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -40,6 +46,7 @@ func (h *Handler) signUp(c *gin.Context) {
 		"access_token":  accessToken,
 		"refresh_token": refreshToken,
 		"user":          user,
+		"deskId":        deckId,
 	})
 }
 
@@ -50,10 +57,7 @@ func (h *Handler) signIn(c *gin.Context) {
 		return
 	}
 
-	fmt.Println("email:", input.Email, "password:", input.PasswordHash)
-
 	user, err := h.services.GetUserByEmail(input)
-	fmt.Println(user)
 	if err != nil {
 		newErrorResponce(c, http.StatusUnauthorized, err.Error())
 		return
@@ -101,36 +105,3 @@ func (h *Handler) refresh(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"access_token": accessToken, "refresh_token": newRefreshToken, "user": expectedUser})
 
 }
-
-func (h *Handler) getAllUsers(c *gin.Context) {
-	users, err := h.services.GetAllUsers()
-	if err != nil {
-		newErrorResponce(c, http.StatusInternalServerError, err.Error())
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"users": users})
-}
-
-//func (h *Handler) update_refreshToken(c *gin.Context) {
-//	var input cards.User
-//	if err := c.BindJSON(&input); err != nil {
-//		newErrorResponce(c, http.StatusBadRequest, "Invalid input data")
-//		return
-//	}
-//
-//	user, err := h.services.AuthenticateUser(input)
-//	if err != nil {
-//		newErrorResponce(c, http.StatusUnauthorized, err.Error())
-//		return
-//	}
-//
-//	accessToken, refreshToken, err := h.services.GenerateTokens(user)
-//	c.SetCookie("refreshToken", refreshToken, 7200, "/", "localhost", false, true)
-//
-//	if err != nil {
-//		newErrorResponce(c, http.StatusInternalServerError, "Failed to generate tokens")
-//		return
-//	}
-//	c.JSON(http.StatusOK, gin.H{"access_token": accessToken, "refresh_token": refreshToken, "user": user})
-//}

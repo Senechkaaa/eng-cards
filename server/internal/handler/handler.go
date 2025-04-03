@@ -26,14 +26,15 @@ func (h *Handler) InitRoutes(tokenManager *auth.Manager) *gin.Engine {
 		auth.POST("sign-up", h.signUp)
 		auth.POST("logout", h.logout)
 		auth.GET("refresh", h.refresh)
-		auth.GET("users", h.getAllUsers)
 		auth.POST("sign-in", h.signIn)
 	}
 
-	//authWithMiddleware := router.Group("/auth")
-	//authWithMiddleware.Use(middleware.AuthMiddleware(tokenManager))
-	//{
-	//	authWithMiddleware.POST("sign-in", h.signIn)
-	//}
+	api := router.Group("api", h.userIdentity)
+	{
+		cards := api.Group("/cards")
+		{
+			cards.POST("create", h.createCard)
+		}
+	}
 	return router
 }

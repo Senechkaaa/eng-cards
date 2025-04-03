@@ -80,7 +80,6 @@ func (m *Manager) Parse(accessToken string) (*UserClaims, error) {
 	}
 
 	claims, ok := token.Claims.(*UserClaims)
-
 	if !ok || !token.Valid {
 		return nil, errors.New("token claims are not of type")
 	}

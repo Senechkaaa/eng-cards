@@ -1,5 +1,5 @@
 import { classNames, Mods } from '../../lib/classNames/classNames';
-import { ChangeEvent, FocusEventHandler, InputHTMLAttributes, useState } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import cl from './Input.module.scss';
 import { Text } from '../Text';
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
@@ -8,11 +8,11 @@ type InputSize = 'sm' | 'm' | 'l';
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'size'>;
 type InputVariant = 'basic' | 'ghost';
+
 export interface InputProps<T extends FieldValues> extends HTMLInputProps {
     className?: string;
-    value?: string | number;
+    classNameWrapper?: string;
     label?: string;
-    onChange?: (value: string) => void;
     size?: InputSize;
     errorName?: Path<T>;
     register?: UseFormRegister<T>;
@@ -24,11 +24,10 @@ export const Input = <T extends FieldValues>(props: InputProps<T>) => {
     const [isFocused, setFocus] = useState(false);
     const {
         className,
-        value,
+        classNameWrapper,
         placeholder,
         size = 'l',
         label,
-        onChange,
         errorName,
         register,
         errors,
@@ -41,10 +40,6 @@ export const Input = <T extends FieldValues>(props: InputProps<T>) => {
         [cl[variant]]: true,
     };
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange?.(e.target.value);
-    };
-
     const onBlur = () => {
         setFocus(false);
     };
@@ -53,43 +48,29 @@ export const Input = <T extends FieldValues>(props: InputProps<T>) => {
         setFocus(true);
     };
 
-    return (
+    const content = register && errorName && (
         <>
-            {label && <Text size='s' label={label} bold />}
-            {register && errors && errorName ? (
-                <>
-                    {errors[errorName]?.message && (
-                        <Text
-                            theme='error'
-                            size='m'
-                            title={String(errors[errorName]?.message)}
-                            bold
-                        />
-                    )}
-                    <input
-                        onFocus={onFocus}
-                        placeholder={placeholder}
-                        className={classNames(cl.input, mods, [className, cl[size]])}
-                        {...otherProps}
-                        {...register(errorName, {
-                            onBlur: onBlur,
-                        })}
-                    />
-                </>
-            ) : (
-                <>
-                    <input
-                        onBlur={onBlur}
-                        onFocus={onFocus}
-                        value={value}
-                        placeholder={placeholder}
-                        onChange={onChangeHandler}
-                        className={classNames(cl.input, mods, [className, cl[size]])}
-                        {...otherProps}
-                    />
-                    {label && <Text label={label} bold />}
-                </>
+            {errors && errors[errorName]?.message && (
+                <Text theme='error' size='m' title={String(errors[errorName]?.message)} bold />
             )}
+            <input
+                onFocus={onFocus}
+                placeholder={placeholder}
+                className={classNames(cl.input, mods, [className, cl[size]])}
+                {...otherProps}
+                {...register(errorName, {
+                    onBlur: onBlur,
+                })}
+            />
+            {label && <Text label={label} bold />}
         </>
     );
+
+    if (variant === 'basic') {
+        return (
+            <div className={classNames(cl.input_wrapper, {}, [classNameWrapper])}>{content}</div>
+        );
+    }
+
+    return content;
 };

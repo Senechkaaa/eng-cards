@@ -5,6 +5,6 @@ db:
   username: "postgres"
   host: "localhost"
   port: "5432"
-  dbname: "postgres"
+  dbname: "eng_cards"
   sslmode: "disable"
   password: "1$3n_uUjdLL1_9$_9HkqQj1$_1"
