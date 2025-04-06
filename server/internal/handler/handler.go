@@ -18,7 +18,6 @@ func NewHandler(services *service.Service) *Handler {
 func (h *Handler) InitRoutes(tokenManager *auth.Manager) *gin.Engine {
 
 	router := gin.Default()
-
 	router.Use(middleware.CorsMiddleware)
 
 	auth := router.Group("/auth")
@@ -29,11 +28,11 @@ func (h *Handler) InitRoutes(tokenManager *auth.Manager) *gin.Engine {
 		auth.POST("sign-in", h.signIn)
 	}
 
-	api := router.Group("api", h.userIdentity)
+	api := router.Group("/api", h.userIdentity)
 	{
-		cards := api.Group("/cards")
+		cards := api.Group("cards")
 		{
-			cards.POST("/", h.createCard)
+			cards.POST("/create", h.createCard)
 			cards.GET("/", h.getCard)
 		}
 	}

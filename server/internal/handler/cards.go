@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	cards "github.com/Senechkaaa/engcards"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -9,19 +10,23 @@ import (
 
 func (h *Handler) createCard(c *gin.Context) {
 	var input cards.Card
+	fmt.Println("ВЫЗВАЛСЯ")
 	if err := c.BindJSON(&input); err != nil {
 		log.Printf("BindJSON error: %v", err)
 		newErrorResponce(c, http.StatusBadRequest, "Invalid input data")
 		return
 	}
+	
 
 	userId, err := getUserId(c)
+	fmt.Println("userId:", userId)
 	if err != nil {
 		newErrorResponce(c, http.StatusUnauthorized, "Invalid user id")
 		return
 	}
 
 	deckId, err := h.services.Cards.GetDeckIdByUserId(userId)
+	fmt.Println("deckId:", deckId)
 	if err != nil {
 		newErrorResponce(c, http.StatusInternalServerError, err.Error())
 		return

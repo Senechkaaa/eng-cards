@@ -1,15 +1,14 @@
-import { useTranslation } from 'react-i18next'
-import { memo } from 'react'
-import NewYorkIcon from '@shared/assets/icons/new-york.svg'
-import cls from './CardsPageLevelProgress.module.scss'
-import { classNames } from '@shared/lib/classNames/classNames'
+import { useTranslation } from 'react-i18next';
+import { memo } from 'react';
+import NewYorkIcon from '@shared/assets/icons/new-york.svg';
+import cls from './CardsPageLevelProgress.module.scss';
+import { classNames } from '@shared/lib/classNames/classNames';
 
 interface CardsPageLevelProgressProps {
-    className?: string
+    className?: string;
 }
 
-
-export const CardsPageLevelProgress = memo(({className}:  CardsPageLevelProgressProps) => {
+export const CardsPageLevelProgress = memo(({ className }: CardsPageLevelProgressProps) => {
     const { t } = useTranslation();
 
     return (
@@ -17,4 +16,4 @@ export const CardsPageLevelProgress = memo(({className}:  CardsPageLevelProgress
             <NewYorkIcon />
         </div>
     );
-})
+});

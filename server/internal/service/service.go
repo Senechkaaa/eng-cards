@@ -8,15 +8,15 @@ import (
 )
 
 type Authorization interface {
-	CreateUser(user cards.User) (string, error)
-	GenerateTokens(username, email string, userId string) (string, string, error)
+	CreateUser(user cards.User) (cards.User, error)
+	GenerateTokens(user cards.User) (string, string, error)
 	Parse(accessToken string) (*auth.UserClaims, error)
 	GetUserById(userId string) (cards.User, error)
 	GetUserByEmail(user cards.User) (cards.User, error)
 }
 
 type TokenManager interface {
-	GenerateTokens(username, email string, userId string) (string, string, error)
+	GenerateTokens(user cards.User) (string, string, error)
 	Parse(accessToken string) (*auth.UserClaims, error)
 }
 

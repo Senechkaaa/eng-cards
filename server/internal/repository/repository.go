@@ -6,7 +6,7 @@ import (
 )
 
 type Authorization interface {
-	CreateUser(user cards.User) (string, error)
+	CreateUser(user cards.User) (cards.User, error)
 	GetUser(username, email, password string) (cards.User, error)
 	FindUserById(userId string) (cards.User, error)
 	FindUserByEmail(user cards.User) (cards.User, error)

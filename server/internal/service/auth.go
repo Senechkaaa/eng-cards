@@ -17,17 +17,17 @@ func NewAuthService(repo repository.Authorization, hash *hash.SHA1Hasher, tokenM
 	return &AuthService{repo: repo, hash: hash, tokenManager: tokenManager}
 }
 
-func (s *AuthService) CreateUser(user cards.User) (string, error) {
+func (s *AuthService) CreateUser(user cards.User) (cards.User, error) {
 	hashedPassword, err := s.hash.HashPassword(user.Password)
 	if err != nil {
-		return "", err
+		return cards.User{}, err
 	}
 	user.Password = hashedPassword
 	return s.repo.CreateUser(user)
 }
 
-func (s *AuthService) GenerateTokens(username, email string, userId string) (string, string, error) {
-	return s.tokenManager.GenerateTokens(username, email, userId)
+func (s *AuthService) GenerateTokens(user cards.User) (string, string, error) {
+	return s.tokenManager.GenerateTokens(user)
 }
 
 func (s *AuthService) Parse(accessToken string) (*auth.UserClaims, error) {

@@ -3,6 +3,7 @@ package auth
 import (
 	"errors"
 	"fmt"
+	cards "github.com/Senechkaaa/engcards"
 	"github.com/golang-jwt/jwt"
 	"log"
 	"time"
@@ -28,19 +29,19 @@ func NewManager(signingKey string) (*Manager, error) {
 	return &Manager{signingKey: signingKey}, nil
 }
 
-func (m *Manager) GenerateTokens(username, email string, userId string) (string, string, error) {
+func (m *Manager) GenerateTokens(user cards.User) (string, string, error) {
 
 	accessClaims := &UserClaims{
-		Id:       userId,
-		Email:    email,
-		Username: username,
+		Id:       user.ID,
+		Email:    user.Email,
+		Username: user.Username,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Local().Add(time.Minute * time.Duration(15)).Unix(),
 		},
 	}
 
 	refreshClaims := &UserClaims{
-		Id: userId,
+		Id: user.ID,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Local().Add(time.Hour * time.Duration(168)).Unix(),
 		},

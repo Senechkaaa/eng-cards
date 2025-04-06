@@ -5,7 +5,7 @@ import { useLoginMutation, useRegistrationMutation } from '../../model/services/
 import { useTranslation } from 'react-i18next';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { validationAuthSchema } from '../../model/consts/validationAuthSchema';
+import { createValidationSChema } from '../../model/consts/validationAuthSchema';
 import { ValidationAuthSchemaType } from '../../model/types/ValidationAuthSchema';
 import { Input } from '@shared/ui/Input';
 import { AuthHeaderButtons } from '../AuthHeaderButtons/AuthHeaderButtons';
@@ -19,6 +19,7 @@ export const LoginForm = () => {
     const [registration] = useRegistrationMutation();
     const { t } = useTranslation('auth');
     const navigate = useNavigate();
+    const validationAuthSchema = createValidationSChema(isLoginForm)
 
     const {
         register,
@@ -68,7 +69,7 @@ export const LoginForm = () => {
                     if (isLoginForm) {
                         onLogin(data.email, data.password);
                     } else {
-                        onRegistration(data.email, data.username, data.password);
+                        onRegistration(data.email, data.username!, data.password);
                     }
                     navigate(Routes.CARDS);
                 })}
@@ -106,7 +107,6 @@ export const LoginForm = () => {
                             contentWithEmailAndPasswordInputs
                         )}
                     </div>
-
                     {isLoginForm ? (
                         <>
                             <Button type='submit' variant='filled'>

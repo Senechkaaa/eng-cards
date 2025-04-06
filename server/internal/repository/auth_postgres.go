@@ -18,16 +18,16 @@ func NewAuthPostgres(db *sqlx.DB) *AuthPostgres {
 	return &AuthPostgres{db: db}
 }
 
-func (r *AuthPostgres) CreateUser(user cards.User) (string, error) {
+func (r *AuthPostgres) CreateUser(user cards.User) (cards.User, error) {
 	user.Time = time.Now()
-	var userId string
 	query := fmt.Sprintf("INSERT INTO %s (username, email, created_at, password, user_type) values($1, $2, $3, $4, $5) RETURNING id", usersTable)
 	row := r.db.QueryRow(query, user.Username, user.Email, user.Time, user.Password, user.UserType)
 
-	if err := row.Scan(&userId); err != nil {
-		return "", err
+	if err := row.Scan(&user.ID); err != nil {
+		return cards.User{}, err
 	}
-	return userId, nil
+
+	return user, nil
 }
 
 func (r *AuthPostgres) GetUser(username, email, password string) (cards.User, error) {
