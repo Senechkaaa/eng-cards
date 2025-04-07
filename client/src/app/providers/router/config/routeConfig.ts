@@ -6,11 +6,11 @@ import { ProfilePage } from '@pages/ProfilePage';
 import { LibraryPage } from '@pages/LibraryPage';
 import { Routes } from '@shared/const/router';
 import { CreatePage } from '@pages/CreatePage';
+import { LearnPage } from '@pages/LearnPage';
 
 export interface IRoutes {
     path: string;
     element: ComponentType;
-    hideBottomNavigator?: boolean
 }
 
 export const publicRoutes: IRoutes[] = [
@@ -40,6 +40,9 @@ export const privateRoutes: IRoutes[] = [
     {
         path: Routes.CREATE,
         element: CreatePage,
-        hideBottomNavigator: true,
+    },
+    {
+        path: Routes.LEARN,
+        element: LearnPage
     },
 ];

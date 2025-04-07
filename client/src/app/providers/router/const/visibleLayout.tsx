@@ -32,7 +32,11 @@ export const visibleLayout: VisibleLayoutProps = {
         bottomNavigator: <BottomNavigator />,
     },
     '/cards/create': {
-        header: <Header headerType='create'/>,
+        header: <Header headerType='create' />,
+        bottomNavigator: null,
+    },
+    '/cards/learn': {
+        header: <Header headerType='create' />,
         bottomNavigator: null,
     },
 };

@@ -10,7 +10,6 @@ import (
 
 func (h *Handler) createCard(c *gin.Context) {
 	var input cards.Card
-	fmt.Println("ВЫЗВАЛСЯ")
 	if err := c.BindJSON(&input); err != nil {
 		log.Printf("BindJSON error: %v", err)
 		newErrorResponce(c, http.StatusBadRequest, "Invalid input data")

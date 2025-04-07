@@ -1,0 +1,7 @@
+.LearnPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - var(--header-toolbar-height));
+    padding: 20px 0 50px 0;
+}

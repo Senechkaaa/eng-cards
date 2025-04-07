@@ -4,5 +4,6 @@ export enum Routes {
     CARDS = '/cards',
     PROFILE = '/profile',
     LIBRARY = '/library',
-    CREATE = `${CARDS}/create`
+    CREATE = `${CARDS}/create`,
+    LEARN = `${CARDS}/learn`,
 }
