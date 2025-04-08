@@ -16,7 +16,9 @@ type Cards interface {
 	CreateDeck(userId string) (string, error)
 	CreateCard(card cards.Card, deckId string) (string, error)
 	GetDeckIdByUserId(userId string) (string, error)
-	GetCardByDeckId(deckId string) ([]cards.Card, error)
+	GetCardsByDeckId(deckId string) ([]cards.Card, error)
+	GetCardById(userId, cardId string) (cards.Card, error)
+	UpdateStatusCard(status, userId, deckId, cardId string) error
 }
 
 type Repository struct {

@@ -54,13 +54,24 @@ func (r *CardsPostgres) GetDeckIdByUserId(userId string) (string, error) {
 	return deckId, nil
 }
 
-func (r *CardsPostgres) GetCardByDeckId(deckId string) ([]cards.Card, error) {
+func (r *CardsPostgres) GetCardsByDeckId(deckId string) ([]cards.Card, error) {
 	var cards []cards.Card
 	query := fmt.Sprintf("SELECT cards.id, cards.deck_id, cards.eng_word, cards.ru_word, cards.example, cards.status  FROM %s INNER JOIN decks ON cards.deck_id = decks.id WHERE decks.id = $1", cardsTable)
 	err := r.db.Select(&cards, query, deckId)
 	return cards, err
 }
 
-//{
-//"message": "missing destination name deck_id in *[]cards.Card"
-//}
+func (r *CardsPostgres) GetCardById(userId, cardId string) (cards.Card, error) {
+	var card cards.Card
+	query := fmt.Sprintf("SELECT cards.id, cards.deck_id, cards.eng_word, cards.ru_word, cards.example, cards.status FROM %s INNER JOIN decks ON cards.deck_id = decks.id INNER JOIN users ON decks.user_id = users.id WHERE users.id = $1 AND cards.id = $2", cardsTable)
+
+	err := r.db.Get(&card, query, userId, cardId)
+	return card, err
+}
+
+func (r *CardsPostgres) UpdateStatusCard(status, userId, deckId, cardId string) error {
+	//query := fmt.Sprintf("UPDATE %s tl SET %s FROM %s li, %s ul WHERE tl.id = li.item_id AND li.list_id = ul.list_id AND ul.user_id = $%d AND tl.id = $%d", todoItemsTable, setQuery, listsItemsTable, argId, argId+1)
+	query := fmt.Sprintf("UPDATE %s SET status = $1 WHERE id = $2 AND deck_id = $3 AND deck_id IN (SELECT id FROM decks WHERE user_id = $4)", cardsTable)
+	_, err := r.db.Exec(query, status, cardId, deckId, userId)
+	return err
+}

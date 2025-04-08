@@ -25,6 +25,14 @@ func (s *CardsService) GetDeckIdByUserId(userId string) (string, error) {
 	return s.repo.GetDeckIdByUserId(userId)
 }
 
-func (s *CardsService) GetCardByDeckId(deckId string) ([]cards.Card, error) {
-	return s.repo.GetCardByDeckId(deckId)
+func (s *CardsService) GetCardsByDeckId(deckId string) ([]cards.Card, error) {
+	return s.repo.GetCardsByDeckId(deckId)
+}
+
+func (s *CardsService) GetCardById(userId, cardId string) (cards.Card, error) {
+	return s.repo.GetCardById(userId, cardId)
+}
+
+func (s *CardsService) UpdateStatusCard(status, userId, deckId, cardId string) error {
+	return s.repo.UpdateStatusCard(status, userId, deckId, cardId)
 }

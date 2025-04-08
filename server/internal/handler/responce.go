@@ -15,3 +15,7 @@ func newErrorResponce(c *gin.Context, statusCode int, message string) {
 		Message: message,
 	})
 }
+
+type statusResponce struct {
+	Status string `json:"status"`
+}
