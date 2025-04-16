@@ -7,7 +7,6 @@ import { getLoginState } from '@features/AuthByUsername/model/selectors/getLogin
 
 export const AppRouter = () => {
     const { isAuth } = useAppSelector(getLoginState);
-    console.log(isAuth)
     return isAuth ? (
         <Suspense fallback={'Loading...'}>
             <Routes>

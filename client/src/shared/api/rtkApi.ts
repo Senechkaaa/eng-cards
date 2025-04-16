@@ -13,7 +13,6 @@ export const baseQuery = fetchBaseQuery({
     baseUrl: API_URL,
     prepareHeaders: (headers) => {
         const token = localStorage.getItem(TOKEN_LOCALSTORAGE_KEY) || '';
-        console.log(token);
         if (token) {
             headers.set('Authorization', `Bearer ${token}`);
         }

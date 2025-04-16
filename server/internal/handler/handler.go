@@ -34,7 +34,7 @@ func (h *Handler) InitRoutes(tokenManager *auth.Manager) *gin.Engine {
 		{
 			cards.POST("/create", h.createCard)
 			cards.GET("/get", h.getCard)
-			cards.PUT("/change", h.updateStatusCard)
+			cards.PUT("/change", h.updateStatusAndCountCard)
 		}
 	}
 	return router

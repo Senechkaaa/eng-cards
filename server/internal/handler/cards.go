@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	cards "github.com/Senechkaaa/engcards"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -15,14 +14,12 @@ func (h *Handler) createCard(c *gin.Context) {
 	}
 
 	userId, err := getUserId(c)
-	fmt.Println("userId:", userId)
 	if err != nil {
 		newErrorResponce(c, http.StatusUnauthorized, "Invalid user id")
 		return
 	}
 
 	deckId, err := h.services.Cards.GetDeckIdByUserId(userId)
-	fmt.Println("deckId:", deckId)
 	if err != nil {
 		newErrorResponce(c, http.StatusInternalServerError, err.Error())
 		return
@@ -64,13 +61,8 @@ func (h *Handler) getCard(c *gin.Context) {
 	})
 }
 
-type UpdateCardStatusInput struct {
-	Status string `json:"status" binding:"required"`
-	CardID string `json:"card_id" binding:"required"`
-}
-
-func (h *Handler) updateStatusCard(c *gin.Context) {
-	var input UpdateCardStatusInput
+func (h *Handler) updateStatusAndCountCard(c *gin.Context) {
+	var input cards.UpdateCardStatusInput
 	if err := c.BindJSON(&input); err != nil {
 		newErrorResponce(c, http.StatusBadRequest, "Invalid input data")
 		return
@@ -88,7 +80,7 @@ func (h *Handler) updateStatusCard(c *gin.Context) {
 		return
 	}
 
-	if err := h.services.Cards.UpdateStatusCard(input.Status, userId, deckId, input.CardID); err != nil {
+	if err := h.services.Cards.UpdateStatusAndCountCard(input, userId, deckId); err != nil {
 		newErrorResponce(c, http.StatusInternalServerError, err.Error())
 	}
 

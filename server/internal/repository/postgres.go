@@ -24,8 +24,6 @@ func NewPostgresDB(cfg Config) (*sqlx.DB, error) {
 	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s", cfg.Host, cfg.Port, cfg.Username, cfg.Password, cfg.DBName, cfg.SSLMode)
 	db, err := sqlx.Open("postgres", connStr)
 
-	fmt.Printf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s", cfg.Host, cfg.Port, cfg.Username, cfg.Password, cfg.DBName, cfg.SSLMode)
-
 	if err != nil {
 		return nil, err
 	}

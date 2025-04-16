@@ -33,6 +33,6 @@ func (s *CardsService) GetCardById(userId, cardId string) (cards.Card, error) {
 	return s.repo.GetCardById(userId, cardId)
 }
 
-func (s *CardsService) UpdateStatusCard(status, userId, deckId, cardId string) error {
-	return s.repo.UpdateStatusCard(status, userId, deckId, cardId)
+func (s *CardsService) UpdateStatusAndCountCard(input cards.UpdateCardStatusInput, userId, deckId string) error {
+	return s.repo.UpdateStatusAndCountCard(input, userId, deckId)
 }
