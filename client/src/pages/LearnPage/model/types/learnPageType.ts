@@ -27,5 +27,4 @@ export interface UpdateDataCardRequest {
 export interface CardSchema {
     cards: Card[];
     cardIndex: number,
-    invertedCard: boolean
 }

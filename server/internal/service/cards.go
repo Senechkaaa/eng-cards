@@ -36,3 +36,7 @@ func (s *CardsService) GetCardById(userId, cardId string) (cards.Card, error) {
 func (s *CardsService) UpdateStatusAndCountCard(input cards.UpdateCardStatusInput, userId, deckId string) error {
 	return s.repo.UpdateStatusAndCountCard(input, userId, deckId)
 }
+
+func (s *CardsService) DeleteCard(cardId, deckId, userId string) error {
+	return s.repo.DeleteCard(cardId, deckId, userId)
+}

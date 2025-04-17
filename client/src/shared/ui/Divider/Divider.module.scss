@@ -1,0 +1,28 @@
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divider_line {
+    flex-grow: 1;
+    background-color: #c4c8d2;
+    margin: 0 10px;
+}
+
+.divider_title {
+    color: #586380;
+    font-weight: 700;
+}
+
+.thin {
+    height: 1px;
+}
+
+.medium {
+    height: 2px;
+}
+
+.bold {
+    height: 3px;
+}

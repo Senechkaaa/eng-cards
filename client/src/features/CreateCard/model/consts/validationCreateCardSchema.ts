@@ -6,6 +6,5 @@ export type TypeErrorNameCreateCards = z.infer<typeof validationCreateCardSchema
 export const validationCreateCardSchema: ZodType<ValidationCreateCardSchemaType> = z.object({
     engWord: z.string().min(1, { message: 'Write word necessarily' }),
     ruWord: z.string().min(1, { message: 'Write word necessarily' }),
-    example: z.string().optional()
+    example: z.string().max(70, { message: 'Maximum number of characters - 70' }).optional(),
 });
-

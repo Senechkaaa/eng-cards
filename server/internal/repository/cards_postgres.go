@@ -71,9 +71,13 @@ func (r *CardsPostgres) GetCardById(userId, cardId string) (cards.Card, error) {
 
 func (r *CardsPostgres) UpdateStatusAndCountCard(input cards.UpdateCardStatusInput, userId, deckId string) error {
 	query := fmt.Sprintf("UPDATE %s SET status = $1, correct_guess_count = $2 WHERE id = $3 AND deck_id = $4 AND deck_id IN (SELECT id FROM decks WHERE user_id = $5)", cardsTable)
-	fmt.Printf("Status: %s, CorrectCount: %d, CardID: %s",
-		input.Status, input.CorrectCount, input.CardID)
 
 	_, err := r.db.Exec(query, input.Status, input.CorrectCount, input.CardID, deckId, userId)
+	return err
+}
+
+func (r *CardsPostgres) DeleteCard(cardId, deckId, userId string) error {
+	query := fmt.Sprintf("DELETE FROM %s WHERE id = $1 AND deck_id = $2 AND deck_id IN (SELECT id FROM decks WHERE user_id = $3)", cardsTable)
+	_, err := r.db.Exec(query, cardId, deckId, userId)
 	return err
 }

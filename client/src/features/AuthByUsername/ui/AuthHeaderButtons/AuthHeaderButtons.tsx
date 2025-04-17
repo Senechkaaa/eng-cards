@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { classNames } from '@shared/lib/classNames/classNames';
 import { Button } from '@shared/ui/Button';
+import { Divider } from '@shared/ui/Divider/Divider';
 
 interface AuthHeaderButtonsProps {
     className?: string;
@@ -37,9 +38,7 @@ export const AuthHeaderButtons = memo((props: AuthHeaderButtonsProps) => {
             </div>
             <Button>{t('Войти через Google')}</Button>
             <Button>{t('Войти через Facebook')}</Button>
-            <div className={cl.divider}>
-                <span className={cl.divider_title}>{t('или адрес эл. почты')}</span>
-            </div>
+            <Divider className={cl.divider}>{t("Или адрес эл.почты")}</Divider>
         </>
     );
 });

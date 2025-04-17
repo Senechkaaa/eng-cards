@@ -27,6 +27,7 @@ type Cards interface {
 	GetCardsByDeckId(deckId string) ([]cards.Card, error)
 	GetCardById(userId, cardId string) (cards.Card, error)
 	UpdateStatusAndCountCard(input cards.UpdateCardStatusInput, userId, deckId string) error
+	DeleteCard(cardId, deckId, userId string) error
 }
 
 type Service struct {
