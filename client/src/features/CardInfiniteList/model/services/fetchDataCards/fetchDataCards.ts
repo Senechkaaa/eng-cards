@@ -1,13 +1,17 @@
 import { authenticationApi } from '@shared/api/rtkApi';
-import { FetchDataCardsResponce } from '../../types/learnPageType';
-import { cardActions } from '../../slice/cardSlice';
+import { cardActions } from '@entities/Card/model/slice/cardSlice';
+import { FetchDataCardsRequest, FetchDataCardsResponce } from '../../types/cardInfiniteList';
 
 const fetchDataCards = authenticationApi.injectEndpoints({
     endpoints: (build) => ({
-        getCards: build.query<FetchDataCardsResponce, void>({
-            query: () => ({
+        getCards: build.query<FetchDataCardsResponce, FetchDataCardsRequest>({
+            query: ({ search }) => ({
                 url: '/api/cards/get',
+                params: {
+                    q: search,
+                },
             }),
+            providesTags: ['Cards'],
             async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;

@@ -14,10 +14,13 @@ export interface InputProps<T extends FieldValues> extends HTMLInputProps {
     classNameWrapper?: string;
     label?: string;
     size?: InputSize;
+    variant?: InputVariant;
+    isValidate?: boolean;
+    value?: string | number;
+    onChange?: (value: string) => void;
     errorName?: Path<T>;
     register?: UseFormRegister<T>;
     errors?: FieldErrors<T>;
-    variant?: InputVariant;
 }
 
 export const Input = <T extends FieldValues>(props: InputProps<T>) => {
@@ -32,6 +35,9 @@ export const Input = <T extends FieldValues>(props: InputProps<T>) => {
         register,
         errors,
         variant = 'ghost',
+        isValidate = true,
+        onChange,
+        value,
         ...otherProps
     } = props;
 
@@ -48,10 +54,14 @@ export const Input = <T extends FieldValues>(props: InputProps<T>) => {
         setFocus(true);
     };
 
-    const content = register && errorName && (
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        onChange?.(e.target.value);
+    };
+
+    const validateContent = register && errorName && (
         <>
             {errors && errors[errorName]?.message && (
-                <Text theme='error' size='m' title={String(errors[errorName]?.message)} bold />
+                <Text theme='error' size='m' title={String(errors[errorName]?.message)} />
             )}
             <input
                 onFocus={onFocus}
@@ -62,15 +72,41 @@ export const Input = <T extends FieldValues>(props: InputProps<T>) => {
                     onBlur: onBlur,
                 })}
             />
-            {label && <Text label={label} bold />}
+            {label && <Text title={label} />}
         </>
     );
 
-    if (variant === 'basic') {
-        return (
-            <div className={classNames(cl.input_wrapper, {}, [classNameWrapper])}>{content}</div>
-        );
-    }
+    const content = (
+        <input
+            onChange={onChangeHandler}
+            value={value}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            className={classNames(cl.input, mods, [className, cl[size]])}
+            placeholder={placeholder}
+            {...otherProps}
+        />
+    );
 
-    return content;
+    return isValidate ? (
+        <>
+            {variant === 'basic' ? (
+                <div className={classNames(cl.input_wrapper, {}, [classNameWrapper])}>
+                    {validateContent}
+                </div>
+            ) : (
+                validateContent
+            )}
+        </>
+    ) : (
+        <>
+            {variant === 'basic' ? (
+                <div className={classNames(cl.input_wrapper, {}, [classNameWrapper])}>
+                    {content}
+                </div>
+            ) : (
+                content
+            )}
+        </>
+    );
 };

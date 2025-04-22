@@ -2,7 +2,7 @@ import { classNames } from '@shared/lib/classNames/classNames';
 import style from '../../styles/styles.module.scss';
 import cls from './MainCard.module.scss';
 import { memo, useCallback, useState } from 'react';
-import { Card as ICard } from '../../model/types/learnPageType';
+import { Card as ICard } from '../../../../entities/Card/types/learnPageType';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { DragItem } from '@shared/ui/DragItem';
 import { useUpdateDataMutation } from '../../model/services/updateDataCard/updateDataCard';
@@ -10,10 +10,13 @@ import {
     handlerMoveLeft,
     handlerMoveRight,
 } from '@pages/LearnPage/model/services/updateDataCardUtils/updateDataCardUtils';
-import { cardActions } from '@pages/LearnPage/model/slice/cardSlice';
-import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch';
+import { cardActions } from '@entities/Card/model/slice/cardSlice';
+import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { Text } from '@shared/ui/Text';
 import { Divider } from '@shared/ui/Divider/Divider';
+import { useDeleteCardApiMutation } from '@features/removeCard';
+import { getCardState } from '@entities/Card/model/selectors/getCardState';
+import { useSelector } from 'react-redux';
 
 interface MainCardProps {
     className?: string;
@@ -22,35 +25,33 @@ interface MainCardProps {
 
 export const MainCard = memo((props: MainCardProps) => {
     const { className, card } = props;
-    const [isInverted, setIsInverted] = useState(false);
     const [updateCard] = useUpdateDataMutation();
+    const [deleteCard] = useDeleteCardApiMutation();
     const dispatch = useAppDispatch();
+    const { isInverted } = useSelector(getCardState);
 
     const handleDragEnd = useCallback(
-        (event: DragEndEvent) => {
-            const { delta } = event;
+        ({ delta }: DragEndEvent) => {
+            console.log(delta.y);
             if (delta.x > 250) {
-                const updatedCard = handlerMoveRight(card);
-                updateCard(updatedCard);
-                dispatch(cardActions.moveRight());
-                setIsInverted(false);
+                updateCard(handlerMoveRight(card));
+                dispatch(cardActions.moveCard());
             } else if (delta.x < -250) {
-                const updatedCard = handlerMoveLeft(card);
-                updateCard(updatedCard);
-                dispatch(cardActions.moveLeft());
-                setIsInverted(false);
+                updateCard(handlerMoveLeft(card));
+                dispatch(cardActions.moveCard());
+            } else if (delta.y < -290) {
+                deleteCard({ card_id: card.id });
+                dispatch(cardActions.moveCard());
             } else {
                 console.log('Карточка осталась на месте');
             }
         },
-        [updateCard, card, dispatch],
+        [updateCard, card, dispatch, deleteCard],
     );
 
-    const flipCard = () => {
-        setIsInverted(true);
-    };
-
-    
+    const flipCard = useCallback(() => {
+        dispatch(cardActions.setIsInverted(true));
+    }, [dispatch]);
 
     return (
         <div
@@ -77,8 +78,14 @@ export const MainCard = memo((props: MainCardProps) => {
                             title={card.eng_word}
                             size='l'
                         />
-                        <Divider border='thin' one className={cls.divider}/>
-                        <Text align='center' className={cls.example} theme='gray' title={card.example} size='s' />
+                        <Divider border='thin' one className={cls.divider} />
+                        <Text
+                            align='center'
+                            className={cls.example}
+                            theme='gray'
+                            title={card.example}
+                            size='s'
+                        />
                     </div>
                 </DragItem>
             </DndContext>

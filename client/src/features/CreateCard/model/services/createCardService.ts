@@ -2,7 +2,6 @@ import { authenticationApi } from '@shared/api/rtkApi';
 import { CreateCardResponce } from '../types/CreateCardResponce';
 import { ValidationCreateCardSchemaType } from '../types/ValidationCreateCardSchemaType';
 
-
 const createCardApi = authenticationApi.injectEndpoints({
     endpoints: (build) => ({
         addCard: build.mutation<CreateCardResponce, ValidationCreateCardSchemaType>({
@@ -15,6 +14,7 @@ const createCardApi = authenticationApi.injectEndpoints({
                     example: arg.example || '',
                 },
             }),
+            invalidatesTags: (result) => ['Cards'],
         }),
     }),
 });

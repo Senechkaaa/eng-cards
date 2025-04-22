@@ -48,5 +48,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const authenticationApi = createApi({
     reducerPath: 'authenticationApi',
     baseQuery: baseQueryWithReauth,
+    tagTypes: ['Cards'],
     endpoints: (_build) => ({}),
 });

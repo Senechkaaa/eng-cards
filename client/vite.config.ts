@@ -22,6 +22,7 @@ export default defineConfig({
                 ref: true,
                 svgo: false,
                 titleProp: true,
+                expandProps: 'start',
             },
             include: '**/*.svg',
         }),

@@ -1,9 +1,10 @@
 import { authenticationApi } from '@shared/api/rtkApi';
-import { UpdateDataCardRequest, UpdateDataCardResponce } from '../../types/learnPageType';
+import { UpdateDataCardRequest } from '../../../../../entities/Card/types/learnPageType';
+import { SuccessCardResponce } from '@shared/types/IUser';
 
 const updateDataCard = authenticationApi.injectEndpoints({
     endpoints: (build) => ({
-        updateData: build.mutation<UpdateDataCardResponce, UpdateDataCardRequest>({
+        updateData: build.mutation<SuccessCardResponce, UpdateDataCardRequest>({
             query: (arg) => ({
                 url: '/api/cards/change',
                 method: 'PUT',

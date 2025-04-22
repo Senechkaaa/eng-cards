@@ -1,4 +1,4 @@
-import { Card } from '../../types/learnPageType';
+import { Card } from '../../../../../entities/Card/types/learnPageType';
 
 export const handlerMoveRight = (card: Card) => ({
     card_id: card.id,

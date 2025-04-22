@@ -19,7 +19,6 @@ interface TextProps {
     title?: string;
     size?: TextSize;
     className?: string;
-    bold?: boolean;
     align?: TextAlign;
     theme?: TextTheme;
 }
@@ -29,7 +28,6 @@ export const Text: FC<TextProps> = (props) => {
         text,
         size = 'm',
         title,
-        bold,
         className,
         align = 'left',
         theme = 'error',
@@ -39,7 +37,6 @@ export const Text: FC<TextProps> = (props) => {
     const mods: Mods = {
         [cl[theme]]: true,
         [cl[align]]: true,
-        [cl.bold]: bold,
         [cl[size]]: true,
     };
 
@@ -49,7 +46,7 @@ export const Text: FC<TextProps> = (props) => {
                 <HeaderTag className={classNames(cl.title, mods, [className])}>{title}</HeaderTag>
             )}
             {text && (
-                <p className={classNames(cl.title, { [cl.bold]: bold }, [className])}>{text}</p>
+                <p className={classNames(cl.title, {}, [className])}>{text}</p>
             )}
         </>
     );

@@ -1,0 +1,26 @@
+.DropDown {
+
+}
+
+.menu {
+    list-style-type: none;
+    border-radius: 3px;
+    position: absolute;
+    outline: 1px solid #dad5d5;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.menuItem {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 7px 50px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+
+    &:hover {
+        background-color: #e9e9e9;
+    }
+}

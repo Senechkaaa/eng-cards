@@ -1,7 +1,7 @@
 import { classNames } from '@shared/lib/classNames/classNames';
 import cls from './LearnPage.module.scss';
 import { memo } from 'react';
-import { CardList } from '../CardList/CardList';
+import { CardsContainer } from '../CardsContainer/CardsContainer';
 
 export interface LearnPageProps {
     className?: string;
@@ -10,9 +10,9 @@ export interface LearnPageProps {
 const LearnPage = memo(({ className }: LearnPageProps) => {
     return (
         <div className={classNames(cls.LearnPage, {}, [className])}>
-            <CardList />
+            <CardsContainer />
         </div>
     );
 });
 
-export default LearnPage
+export default LearnPage;

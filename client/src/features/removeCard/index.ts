@@ -1,0 +1,1 @@
+export {useDeleteCardApiMutation} from './model/services/deleteCardService'

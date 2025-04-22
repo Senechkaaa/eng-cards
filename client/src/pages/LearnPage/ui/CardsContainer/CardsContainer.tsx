@@ -1,9 +1,9 @@
 import style from '../../styles/styles.module.scss';
-import cls from './CardList.module.scss';
+import cls from './CardsContainer.module.scss';
 import { memo, useEffect } from 'react';
-import { useAppSelector } from '@shared/lib/hooks/useAppSelector';
-import { getCardState } from '../../model/selectors/getCardState';
-import { useGetCardsQuery } from '../../model/services/fetchDataCards/fetchDataCards';
+import { useAppSelector } from '@shared/lib/hooks/useAppSelector/useAppSelector';
+import { getCardState } from '../../../../entities/Card/model/selectors/getCardState';
+import { useGetCardsQuery } from '../../../../features/CardInfiniteList/model/services/fetchDataCards/fetchDataCards';
 import { Text } from '@shared/ui/Text';
 import { classNames } from '@shared/lib/classNames/classNames';
 import { AppLink } from '@shared/ui/AppLink';
@@ -11,8 +11,8 @@ import { Routes } from '@shared/const/router';
 import { MainCard } from '../MainCard/MainCard';
 import { Button } from '@shared/ui/Button';
 
-export const CardList = memo(() => {
-    const { refetch, isError, isLoading } = useGetCardsQuery();
+export const CardsContainer = memo(() => {
+    const { refetch, isError, isLoading } = useGetCardsQuery({ search: '' });
     const { cardIndex, cards } = useAppSelector(getCardState);
     const card = cards?.[cardIndex];
     const nextCard = cards?.[cardIndex + 1];
@@ -29,7 +29,6 @@ export const CardList = memo(() => {
         // временная заглушка, сделать skeleton loader
         return <Text size='l' title='loading...' theme='blue' />;
     }
-
 
     return cards?.[cardIndex] ? (
         <div className={classNames(cls.cards, {}, [])}>
@@ -50,7 +49,7 @@ export const CardList = memo(() => {
                     />
                 </div>
             )}
-            <MainCard card={cards?.[cardIndex]} />
+            <MainCard card={card} />
         </div>
     ) : (
         <div className={cls.contNewWords}>

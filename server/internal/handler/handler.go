@@ -33,9 +33,9 @@ func (h *Handler) InitRoutes(tokenManager *auth.Manager) *gin.Engine {
 		cards := api.Group("cards")
 		{
 			cards.POST("/create", h.createCard)
-			cards.GET("/get", h.getCard)
+			cards.GET("/get", h.getCards)
 			cards.PUT("/change", h.updateStatusAndCountCard)
-			cards.PUT("/delete", h.deleteCard)
+			cards.DELETE("/delete", h.deleteCard)
 		}
 	}
 	return router

@@ -7,7 +7,7 @@
 
 .btn {
     width: 80%;
-    margin-bottom: 30px;
+    align-items: center;
 }
 
 .btn_actions {
@@ -15,6 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 30px 0;
 }
 
 .container_btn {
@@ -29,3 +30,26 @@
     margin-right: 15px;
 }
 
+.arrowIcon {
+    transform: rotate(-90deg);
+    fill: #000;
+    width: 13px;
+    height: 13px;
+    margin: 0 8px;
+    transition: transform 0.2s ease;
+}
+
+.rotated {
+    transform: rotate(-270deg);
+}
+
+.cardsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.cardsInfiniteList {
+    margin-top: 30px;
+}

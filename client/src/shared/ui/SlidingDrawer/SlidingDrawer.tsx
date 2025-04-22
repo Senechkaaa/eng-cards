@@ -36,7 +36,6 @@ export const SlidingDrawer = memo((props: SlidingDrawerProps) => {
     };
 
     if (!isMounted && lazy) {
-        console.log('возвращаю null');
         return null;
     }
 

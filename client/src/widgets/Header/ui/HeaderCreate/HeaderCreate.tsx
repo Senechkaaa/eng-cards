@@ -19,7 +19,7 @@ export const HeaderCreate = memo(({ className }: HeaderCreateProps) => {
     return (
         <div className={classNames(cls.HeaderCreate, {}, [className])}>
             <Button className={cls.arrow_btn} variant='none' onClick={() => navigate(Routes.CARDS)}>
-                <ArrowIcon />
+                <ArrowIcon className={cls.arrowIcon}/>
             </Button>
             <LangSwitcher className={cls.lang_switcher} />
         </div>

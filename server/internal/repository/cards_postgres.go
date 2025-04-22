@@ -54,11 +54,13 @@ func (r *CardsPostgres) GetDeckIdByUserId(userId string) (string, error) {
 	return deckId, nil
 }
 
-func (r *CardsPostgres) GetCardsByDeckId(deckId string) ([]cards.Card, error) {
-	var cards []cards.Card
-	query := fmt.Sprintf("SELECT cards.id, cards.deck_id, cards.eng_word, cards.ru_word, cards.example, cards.status, cards.correct_guess_count FROM %s INNER JOIN decks ON cards.deck_id = decks.id WHERE decks.id = $1", cardsTable)
-	err := r.db.Select(&cards, query, deckId)
-	return cards, err
+func (r *CardsPostgres) GetCardsByDeckId(deckId, userId, query string) ([]cards.Card, error) {
+    var cards []cards.Card
+    sqlQuery := fmt.Sprintf(`
+        SELECT cards.id, cards.deck_id, cards.eng_word, cards.ru_word, cards.example, cards.status, cards.correct_guess_count FROM %s AS cards INNER JOIN decks ON cards.deck_id = decks.id WHERE decks.id = $1 AND decks.user_id = $2 AND ($3 = '' OR cards.ru_word ILIKE $3 OR cards.eng_word ILIKE $3 OR cards.example ILIKE $3)`, cardsTable)
+
+    err := r.db.Select(&cards, sqlQuery, deckId, userId, "%"+query+"%")
+    return cards, err
 }
 
 func (r *CardsPostgres) GetCardById(userId, cardId string) (cards.Card, error) {

@@ -8,5 +8,8 @@ export interface UserData {
 
 export interface IUser {
     data: UserData,
+}
 
+export interface SuccessCardResponce {
+    status: string;
 }

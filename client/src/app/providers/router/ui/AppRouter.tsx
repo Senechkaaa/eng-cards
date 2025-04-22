@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from '../config/routeConfig';
 import { Suspense } from 'react';
 import { Layout } from './Layout/Layout';
-import { useAppSelector } from '@shared/lib/hooks/useAppSelector';
+import { useAppSelector } from '@shared/lib/hooks/useAppSelector/useAppSelector';
 import { getLoginState } from '@features/AuthByUsername/model/selectors/getLoginState/getLoginState';
 
 export const AppRouter = () => {
