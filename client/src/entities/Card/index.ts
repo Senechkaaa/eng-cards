@@ -1,0 +1,1 @@
+export { getCardState } from './model/selectors/getCardState'

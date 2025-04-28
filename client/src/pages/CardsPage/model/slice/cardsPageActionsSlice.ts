@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CardsPageActionsSchema } from '../types/cardsPageActions';
+import { CardSortFieldOptions } from '../consts/cardStatusOptions';
 
 const initialState: CardsPageActionsSchema = {
     isVisible: false,
     search: "",
+    sort: CardSortFieldOptions.ALL
 };
 
 const cardsPageActionsSlice = createSlice({
@@ -15,6 +17,9 @@ const cardsPageActionsSlice = createSlice({
         },
         setSearch: (state, action: PayloadAction<string>) => {
             state.search = action.payload
+        },
+        setSort: (state, action: PayloadAction<CardSortFieldOptions>) => {
+            state.sort = action.payload
         }
     },
 

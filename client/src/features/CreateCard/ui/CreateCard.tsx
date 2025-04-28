@@ -98,7 +98,7 @@ export const CreateCard = memo(({ className }: CreateCardProps) => {
                     />
                 </div>
             )}
-            <Button type='submit'>{t('Сохранить')}</Button>
+            <Button className={cls.btn} type='submit'>{t('Сохранить')}</Button>
         </form>
     );
 });

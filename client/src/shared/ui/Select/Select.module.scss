@@ -1,0 +1,33 @@
+.Select {
+    position: absolute;
+    width: 200px;
+}
+
+.wrapperSelect {
+    z-index: var(--sliding-drawer-z-index);
+    position: absolute;
+    width: 100%;
+    background: #fff;
+}
+
+.trigger {
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 3px;
+    cursor: pointer;
+    width: 100%;
+    position: relative;
+    flex: 1;
+}
+
+.item {
+    padding: 10px 17px;
+    list-style-type: none;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+
+    &:hover {
+        background-color: #f7f0f0;
+    }
+}

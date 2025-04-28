@@ -2,14 +2,15 @@ import style from '../../styles/styles.module.scss';
 import cls from './CardsContainer.module.scss';
 import { memo, useEffect } from 'react';
 import { useAppSelector } from '@shared/lib/hooks/useAppSelector/useAppSelector';
-import { getCardState } from '../../../../entities/Card/model/selectors/getCardState';
-import { useGetCardsQuery } from '../../../../features/CardInfiniteList/model/services/fetchDataCards/fetchDataCards';
+import { getCardState } from '@entities/Card';
+import { useGetCardsQuery } from '@features/CardInfiniteList';
 import { Text } from '@shared/ui/Text';
 import { classNames } from '@shared/lib/classNames/classNames';
 import { AppLink } from '@shared/ui/AppLink';
 import { Routes } from '@shared/const/router';
 import { MainCard } from '../MainCard/MainCard';
 import { Button } from '@shared/ui/Button';
+import { Row } from '@shared/ui/Row';
 
 export const CardsContainer = memo(() => {
     const { refetch, isError, isLoading } = useGetCardsQuery({ search: '' });
@@ -52,13 +53,13 @@ export const CardsContainer = memo(() => {
             <MainCard card={card} />
         </div>
     ) : (
-        <div className={cls.contNewWords}>
+        <Row direction='column' align='center' className={cls.contNewWords}>
             <Text theme='blue' size='l' title='Карточки закончились' />
             <AppLink to={Routes.CREATE}>
                 <Button className={cls.btn} size='l' variant='outlined'>
                     Пора добавить новые слова
                 </Button>
             </AppLink>
-        </div>
+        </Row>
     );
 });

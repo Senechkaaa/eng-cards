@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	cards "github.com/Senechkaaa/engcards"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -52,9 +51,9 @@ func (h *Handler) getCards(c *gin.Context) {
 	}
 
 	query := c.Query("q")
-	fmt.Println(query)
+	queryStatus := c.Query("queryStatus")
 
-	cards, err := h.services.GetCardsByDeckId(deckId, userId, query)
+	cards, err := h.services.GetCardsByDeckId(deckId, userId, query, queryStatus)
 	if err != nil {
 		newErrorResponce(c, http.StatusInternalServerError, err.Error())
 		return

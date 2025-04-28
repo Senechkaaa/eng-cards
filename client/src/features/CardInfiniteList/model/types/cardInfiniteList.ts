@@ -1,3 +1,4 @@
+import { CardSortFieldOptions } from '@pages/CardsPage/model/consts/cardStatusOptions';
 import { ICard } from '@shared/types/ICard';
 
 export interface FetchDataCardsResponce {
@@ -6,4 +7,5 @@ export interface FetchDataCardsResponce {
 
 export interface FetchDataCardsRequest {
     search: string;
+    status?: CardSortFieldOptions
 }

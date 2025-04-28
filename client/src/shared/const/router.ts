@@ -6,4 +6,7 @@ export enum Routes {
     LIBRARY = '/library',
     CREATE = `${CARDS}/create`,
     LEARN = `${CARDS}/learn`,
+    SUPPORT = '/support',
+    PREMIUM = `${PROFILE}/premium`,
+    FAQ = '/faq',
 }

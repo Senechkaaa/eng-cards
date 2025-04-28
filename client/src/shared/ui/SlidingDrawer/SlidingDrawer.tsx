@@ -46,7 +46,7 @@ export const SlidingDrawer = memo((props: SlidingDrawerProps) => {
     return (
         <Portal>
             <div className={classNames(cls.SlidingMenu, mods, [className])}>
-                <Overlay isClosed={!isOpen} onClick={close} />
+                <Overlay isBlur isClosed={!isOpen} onClick={close} />
                 <div onClick={contentClick} className={classNames(cls.content)}>
                     {children}
                 </div>

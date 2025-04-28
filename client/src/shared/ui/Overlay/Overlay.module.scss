@@ -6,12 +6,15 @@
     position: fixed;
     inset: 0;
     z-index: var(--overlay-z-index);
-    background: var(--overaly-bg);
-    backdrop-filter: blur(2px);
     transition: none !important;
     opacity: 1;
 
     &.closed {
         opacity: 0;
+    }
+
+    &.isBlur {
+        backdrop-filter: blur(2px);
+        background: var(--overaly-bg);
     }
 }

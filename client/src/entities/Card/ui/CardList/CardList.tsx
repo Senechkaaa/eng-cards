@@ -4,10 +4,6 @@ import { memo } from 'react';
 import { ICard } from '@shared/types/ICard';
 import { Text } from '@shared/ui/Text';
 import { useDeleteCardApiMutation } from '@features/removeCard';
-import { Button } from '@shared/ui/Button';
-import { AppLink } from '@shared/ui/AppLink';
-import { Routes } from '@shared/const/router';
-import { useTranslation } from 'react-i18next';
 import { CardListItem } from '../CardListItem/CardListItem';
 
 interface CardListProps {
@@ -20,7 +16,6 @@ interface CardListProps {
 export const CardList = memo((props: CardListProps) => {
     const { className, cards, isError, isLoading } = props;
     const [deleteCard] = useDeleteCardApiMutation();
-    const { t } = useTranslation();
 
     if (isError) {
         return (
@@ -46,12 +41,7 @@ export const CardList = memo((props: CardListProps) => {
     if (!cards) {
         return (
             <>
-                <Text theme='blue' size='l' title='Карточки закончились' />
-                <AppLink to={Routes.CREATE}>
-                    <Button className={cls.btn} size='l' variant='outlined'>
-                        {t('Пора добавить новые слова')}
-                    </Button>
-                </AppLink>
+                <Text theme='blue' size='l' title='Такой карточки не существует' />
             </>
         );
     }
