@@ -36,10 +36,6 @@ func (h *Handler) InitRoutes(tokenManager *auth.Manager) *gin.Engine {
 			cards.GET("/get", h.getCards)
 			cards.PUT("/change", h.updateStatusAndCountCard)
 			cards.DELETE("/delete", h.deleteCard)
-		},
-		files := api.Group("files")
-		{
-			files.POST('/upload', h.uploadFile)
 		}
 	}
 	return router
