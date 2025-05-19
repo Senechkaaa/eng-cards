@@ -18,7 +18,7 @@ export const HeaderMain = memo(({ className }: HeaderMainProps) => {
         <div className={classNames(cls.HeaderMain, {}, [className])}>
             <div className={cls.container}>
                 <LangSwitcher />
-                <div>logo</div>
+                <div>{t("Logo заглушка")}</div>
                 <ul>
                     <li>
                         <h2>{t('Часто задаваемые вопросы')}</h2>

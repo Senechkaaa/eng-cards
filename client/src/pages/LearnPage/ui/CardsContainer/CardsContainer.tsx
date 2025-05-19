@@ -11,13 +11,14 @@ import { Routes } from '@shared/const/router';
 import { MainCard } from '../MainCard/MainCard';
 import { Button } from '@shared/ui/Button';
 import { Row } from '@shared/ui/Row';
+import { useTranslation } from 'react-i18next';
 
 export const CardsContainer = memo(() => {
     const { refetch, isError, isLoading } = useGetCardsQuery({ search: '' });
     const { cardIndex, cards } = useAppSelector(getCardState);
     const card = cards?.[cardIndex];
     const nextCard = cards?.[cardIndex + 1];
-
+    const { t } = useTranslation();
     useEffect(() => {
         refetch();
     }, [refetch]);
@@ -57,7 +58,7 @@ export const CardsContainer = memo(() => {
             <Text theme='blue' size='l' title='Карточки закончились' />
             <AppLink to={Routes.CREATE}>
                 <Button className={cls.btn} size='l' variant='outlined'>
-                    Пора добавить новые слова
+                    {t('Пора добавить новые слова')}
                 </Button>
             </AppLink>
         </Row>

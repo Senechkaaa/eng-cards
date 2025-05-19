@@ -8,6 +8,7 @@ import PalleteIcon from '@shared/assets/icons/palette.svg';
 import PalleteFilledIcon from '@shared/assets/icons/palette-filled.svg';
 import StatisticsIcon from '@shared/assets/icons/statistics.svg';
 import StatisticsFilledIcon from '@shared/assets/icons/statistics-filled.svg';
+import { useTranslation } from 'react-i18next';
 
 interface HeaderCardsProps {
     className?: string;
@@ -21,7 +22,7 @@ interface onChangeDrawerProps {
 export const HeaderCards = memo(({ className }: HeaderCardsProps) => {
     const [isShowDrawerPallete, setIsShowDrawerPallete] = useState(false);
     const [isShowDrawerStatistics, setIsShowDrawerStatistics] = useState(false);
-
+    const {t} = useTranslation()
     const onChangeDrawer = useCallback(
         ({ setCurrentState, setOtherState }: onChangeDrawerProps) => {
             setOtherState(false);
@@ -62,7 +63,7 @@ export const HeaderCards = memo(({ className }: HeaderCardsProps) => {
                     isOpen={isShowDrawerPallete}
                     onClose={() => setIsShowDrawerPallete(false)}
                 >
-                    <h2>Pallete</h2>
+                    <h2>{t('Pallet заглушка. Процесс в ращработке...')}</h2>
                 </SlidingDrawer>
             )}
             {isShowDrawerStatistics && (
@@ -70,7 +71,7 @@ export const HeaderCards = memo(({ className }: HeaderCardsProps) => {
                     isOpen={isShowDrawerStatistics}
                     onClose={() => setIsShowDrawerStatistics(false)}
                 >
-                    <h2>Statistics</h2>
+                    <h2>{t('Statistics заглушка. Процесс в ращработке...')}</h2>
                 </SlidingDrawer>
             )}
         </div>

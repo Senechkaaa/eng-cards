@@ -1,6 +1,5 @@
 import { classNames } from '@shared/lib/classNames/classNames';
 import cls from './HeaderCreate.module.scss';
-import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import ArrowIcon from '@shared/assets/icons/arrow.svg';
 import { Button } from '@shared/ui/Button';
@@ -13,7 +12,6 @@ interface HeaderCreateProps {
 }
 
 export const HeaderCreate = memo(({ className }: HeaderCreateProps) => {
-    const { t } = useTranslation();
     const navigate = useNavigate();
 
     return (

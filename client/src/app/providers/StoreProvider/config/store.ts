@@ -24,6 +24,7 @@ export const setupStore = (initialState?: StateSchema) => {
     });
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const store = setupStore();
 
 export type RootState = ReturnType<typeof store.getState>;

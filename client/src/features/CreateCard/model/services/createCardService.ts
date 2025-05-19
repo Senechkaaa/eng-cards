@@ -14,7 +14,7 @@ const createCardApi = authenticationApi.injectEndpoints({
                     example: arg.example || '',
                 },
             }),
-            invalidatesTags: (result) => ['Cards'],
+            invalidatesTags: (_result) => ['Cards'],
         }),
     }),
 });

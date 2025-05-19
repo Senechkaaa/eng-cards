@@ -1,8 +1,7 @@
 import { classNames } from '@shared/lib/classNames/classNames';
 import style from '../../styles/styles.module.scss';
 import cls from './MainCard.module.scss';
-import { memo, useCallback, useState } from 'react';
-import { Card as ICard } from '../../../../entities/Card/types/learnPageType';
+import { memo, useCallback, } from 'react';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { DragItem } from '@shared/ui/DragItem';
 import { useUpdateDataMutation } from '../../model/services/updateDataCard/updateDataCard';
@@ -17,6 +16,7 @@ import { Divider } from '@shared/ui/Divider/Divider';
 import { useDeleteCardApiMutation } from '@features/removeCard';
 import { getCardState } from '@entities/Card/model/selectors/getCardState';
 import { useSelector } from 'react-redux';
+import { ICard } from '@shared/types/ICard';
 
 interface MainCardProps {
     className?: string;

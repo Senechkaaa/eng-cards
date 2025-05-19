@@ -17,7 +17,7 @@ export const AuthHeaderButtons = memo((props: AuthHeaderButtonsProps) => {
     
     return (
         <>
-            <div className={cl.AuthHeaderButtons}>
+            <div className={classNames(cl.AuthHeaderButtons, {}, [className])}>
                 <Button
                     size='xl'
                     variant='none'
@@ -38,7 +38,7 @@ export const AuthHeaderButtons = memo((props: AuthHeaderButtonsProps) => {
             </div>
             <Button>{t('Войти через Google')}</Button>
             <Button>{t('Войти через Facebook')}</Button>
-            <Divider className={cl.divider}>{t("Или адрес эл.почты")}</Divider>
+            <Divider className={cl.divider}>{t('Или адрес эл.почты')}</Divider>
         </>
     );
 });

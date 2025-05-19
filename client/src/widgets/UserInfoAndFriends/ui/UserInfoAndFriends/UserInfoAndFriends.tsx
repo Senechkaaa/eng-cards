@@ -1,6 +1,6 @@
 import { classNames } from '@shared/lib/classNames/classNames';
 import cls from './UserInfoAndFriends.module.scss';
-import { ChangeEvent, memo, SetStateAction, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { getUserAuthData } from '@entities/User';
 import { useAppSelector } from '@shared/lib/hooks/useAppSelector/useAppSelector';
 import { Text } from '@shared/ui/Text';
@@ -27,6 +27,7 @@ export const UserInfoAndFriends = memo(({ className }: UserInfoAndFriendsProps) 
     const [logout] = useLogoutMutation();
     const navigate = useNavigate();
     const [file, setFile] = useState<File | null>(null);
+    console.log(file)
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {

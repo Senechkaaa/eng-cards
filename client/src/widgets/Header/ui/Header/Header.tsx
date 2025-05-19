@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { HeaderMain } from '../HeaderMain/HeaderMain';
 import { HeaderCards } from '../HeaderCards/HeaderCards';
@@ -12,7 +11,6 @@ interface HeaderProps {
 }
 
 export const Header = memo(({headerType}: HeaderProps) => {
-    const { t } = useTranslation();
 
     return (
         <header className={cls.header}>

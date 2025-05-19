@@ -11,5 +11,5 @@ interface HeaderLibraryProps {
 export const HeaderLibrary = memo(({className}:  HeaderLibraryProps) => {
     const { t } = useTranslation();
 
-    return <div className={classNames(cls.HeaderLibrary, {}, [className])}>HeaderLibrary</div>;
+    return <div className={classNames(cls.HeaderLibrary, {}, [className])}>{t("Header Library. Процесс в разработке...")}</div>;
 })

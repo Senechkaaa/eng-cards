@@ -26,6 +26,7 @@ export const CardListItem = memo(({ className, card, onDeleteCard }: CardListIte
                 <Text theme='gray' title={card.ru_word} size='s' />
                 <Text theme='light_gray' title={card.example} size='m' />
             </div>
+
             <Button onClick={() => onDeleteCard(card.id)} variant='none'>
                 <TrachCanIcon className={cls.icon} />
             </Button>

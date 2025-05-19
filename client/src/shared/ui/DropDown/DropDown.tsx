@@ -11,7 +11,7 @@ interface DropDownProps {
 }
 
 interface DropDownItems {
-    onClick?: (args?: any) => void;
+    onClick?: (args?: any) => void; // eslint-disable-line  @typescript-eslint/no-explicit-any
     content?: ReactNode;
     href?: string;
 }

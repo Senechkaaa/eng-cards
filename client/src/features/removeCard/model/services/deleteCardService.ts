@@ -12,7 +12,7 @@ const deleteCardApi = authenticationApi.injectEndpoints({
                     card_id: arg.card_id,
                 },
             }),
-            invalidatesTags: (result) => ['Cards'],
+            invalidatesTags: (_result) => ['Cards'],
         }),
     }),
 });

@@ -10,7 +10,7 @@ export interface LibraryPageProps {
 const LibraryPage = memo(({ className }: LibraryPageProps) => {
     const { t } = useTranslation();
 
-    return <div className={classNames(cls.LibraryPage, {}, [className])}>LibraryPage</div>;
+    return <div className={classNames(cls.LibraryPage, {}, [className])}>{t("Library page. Процесс в разработке")}</div>;
 });
 
 export default LibraryPage
