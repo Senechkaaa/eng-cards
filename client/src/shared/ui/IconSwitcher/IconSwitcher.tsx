@@ -1,11 +1,11 @@
-import { memo } from 'react';
+import { FC, memo, SVGProps } from 'react';
 import { Button } from '../Button';
 
 interface IconSwitcherProps {
-    Icon: string;
-    SelectedIcon: string;
+    Icon: FC<SVGProps<SVGSVGElement>>;
+    SelectedIcon: FC<SVGProps<SVGSVGElement>>;
     isSelected: boolean;
-    onClick?: () => void
+    onClick?: () => void;
 }
 
 export const IconSwitcher = memo((props: IconSwitcherProps) => {
