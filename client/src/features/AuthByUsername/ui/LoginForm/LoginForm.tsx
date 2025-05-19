@@ -17,10 +17,9 @@ export const LoginForm = () => {
     const [isLoginForm, setIsLoginForm] = useState(false);
     const [login] = useLoginMutation();
     const [registration] = useRegistrationMutation();
+    const validationAuthSchema = createValidationSChema(isLoginForm)
     const { t } = useTranslation('auth');
     const navigate = useNavigate();
-    const validationAuthSchema = createValidationSChema(isLoginForm)
-
     const {
         register,
         handleSubmit,
@@ -29,6 +28,7 @@ export const LoginForm = () => {
         resolver: zodResolver<ValidationAuthSchemaType>(validationAuthSchema),
     });
 
+    console.log(errors)
     const onLogin = useCallback(
         (email: string, password: string) => {
             login({ email, password });
@@ -51,6 +51,7 @@ export const LoginForm = () => {
                 errorName='email'
                 register={register}
                 errors={errors}
+                className={cl.input}
             />
             <Input<ValidationAuthSchemaType>
                 label={t('Пароль')}
@@ -58,6 +59,7 @@ export const LoginForm = () => {
                 errorName='password'
                 register={register}
                 errors={errors}
+                className={cl.input}
             />
         </>
     );
@@ -93,6 +95,7 @@ export const LoginForm = () => {
                                     errorName='username'
                                     register={register}
                                     errors={errors}
+                                    className={cl.input}
                                 />
                                 {contentWithEmailAndPasswordInputs}
                                 <Input<ValidationAuthSchemaType>
@@ -101,6 +104,7 @@ export const LoginForm = () => {
                                     errorName='confirmPassword'
                                     register={register}
                                     errors={errors}
+                                    className={cl.input}
                                 />
                             </>
                         ) : (
@@ -109,7 +113,7 @@ export const LoginForm = () => {
                     </div>
                     {isLoginForm ? (
                         <>
-                            <Button type='submit' variant='filled'>
+                            <Button className={cl.btn_register} type='submit' variant='filled'>
                                 {t('Войти')}
                             </Button>
                             <Button onClick={() => setIsLoginForm(false)}>
@@ -118,7 +122,7 @@ export const LoginForm = () => {
                         </>
                     ) : (
                         <>
-                            <Button type='submit' variant='filled'>
+                            <Button className={cl.btn_register} type='submit' variant='filled'>
                                 {t('Зарегистрироваться')}
                             </Button>
                             <Button onClick={() => setIsLoginForm(true)}>

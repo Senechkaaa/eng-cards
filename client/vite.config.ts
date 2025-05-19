@@ -18,10 +18,7 @@ export default defineConfig({
         react(),
         svgr({
             svgrOptions: {
-                exportType: 'default',
-                ref: true,
-                svgo: false,
-                titleProp: true,
+                exportType: 'named',
                 expandProps: 'start',
             },
             include: '**/*.svg',

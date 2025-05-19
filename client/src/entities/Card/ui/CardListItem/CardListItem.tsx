@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { ICard } from '@shared/types/ICard';
 import { Text } from '@shared/ui/Text';
 import { Button } from '@shared/ui/Button';
-import TrachCanIcon from '@shared/assets/icons/trash-can.svg';
+import { ReactComponent as TrachCanIcon } from '@shared/assets/icons/trash-can.svg';
 import { Row } from '@shared/ui/Row';
 
 interface CardListItemProps {

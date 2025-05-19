@@ -9,8 +9,8 @@ import { ValidationCreateCardSchemaType } from '../model/types/ValidationCreateC
 import { validationCreateCardSchema } from '../model/consts/validationCreateCardSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Text } from '@shared/ui/Text';
-import CheckMarkIcon from '@shared/assets/icons/check-mark.svg';
-import CrossIcon from '@shared/assets/icons/cross.svg';
+import { ReactComponent as CheckMarkIcon } from '@shared/assets/icons/check-mark.svg';
+import { ReactComponent as CrossIcon } from '@shared/assets/icons/cross.svg';
 import { useAddCardMutation } from '../model/services/createCardService';
 import { getFormFields } from '../model/consts/formFields';
 

@@ -4,10 +4,10 @@ import { Dispatch, memo, SetStateAction, useCallback, useState } from 'react';
 import { IconSwitcher } from '@shared/ui/IconSwitcher/IconSwitcher';
 import { LangSwitcher } from '@widgets/LangSwitcher/ui/LangSwitcher';
 import { SlidingDrawer } from '@shared/ui/SlidingDrawer/SlidingDrawer';
-import PalleteIcon from '@shared/assets/icons/palette.svg';
-import PalleteFilledIcon from '@shared/assets/icons/palette-filled.svg';
-import StatisticsIcon from '@shared/assets/icons/statistics.svg';
-import StatisticsFilledIcon from '@shared/assets/icons/statistics-filled.svg';
+import { ReactComponent as PalleteIcon } from '@shared/assets/icons/palette.svg';
+import { ReactComponent as PalleteFilledIcon } from '@shared/assets/icons/palette-filled.svg';
+import { ReactComponent as StatisticsIcon } from '@shared/assets/icons/statistics.svg';
+import { ReactComponent as StatisticsFilledIcon} from '@shared/assets/icons/statistics-filled.svg';
 import { useTranslation } from 'react-i18next';
 
 interface HeaderCardsProps {

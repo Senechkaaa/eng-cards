@@ -60,6 +60,7 @@ export const Input = <T extends FieldValues>(props: InputProps<T>) => {
 
     const validateContent = register && errorName && (
         <>
+            {label && <Text theme='blue' title={label} />}
             {errors && errors[errorName]?.message && (
                 <Text theme='error' size='m' title={String(errors[errorName]?.message)} />
             )}
@@ -72,7 +73,6 @@ export const Input = <T extends FieldValues>(props: InputProps<T>) => {
                     onBlur: onBlur,
                 })}
             />
-            {label && <Text title={label} />}
         </>
     );
 

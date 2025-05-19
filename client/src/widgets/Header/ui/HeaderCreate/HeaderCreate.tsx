@@ -1,7 +1,7 @@
 import { classNames } from '@shared/lib/classNames/classNames';
 import cls from './HeaderCreate.module.scss';
 import { memo } from 'react';
-import ArrowIcon from '@shared/assets/icons/arrow.svg';
+import { ReactComponent as ArrowIcon } from '@shared/assets/icons/arrow.svg';
 import { Button } from '@shared/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import { Routes } from '@shared/const/router';

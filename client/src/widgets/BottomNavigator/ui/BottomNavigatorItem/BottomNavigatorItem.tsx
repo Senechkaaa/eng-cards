@@ -16,12 +16,12 @@ interface BottomNavigatorItemProps {
 export const BottomNavigatorItem = memo((props: BottomNavigatorItemProps) => {
     const { className, item, isSelected } = props;
     const { t } = useTranslation();
-    const Icon = isSelected ? item.SelectedIcon : item.Icon
+    const { Icon, SelectedIcon, path, title } = item;
 
     return (
-        <AppLink to={item.path} className={classNames(cls.item, {}, [className])}>
-            <Icon />
-            <Text size='s' title={t(item.title)} theme='gray' />
+        <AppLink to={path} className={classNames(cls.item, {}, [className])}>
+            {SelectedIcon && isSelected ? <SelectedIcon /> : <Icon />}
+            <Text size='s' title={t(title)} theme='gray' />
         </AppLink>
     );
 });

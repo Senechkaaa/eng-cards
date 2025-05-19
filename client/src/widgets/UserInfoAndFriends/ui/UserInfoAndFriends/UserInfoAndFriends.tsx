@@ -8,7 +8,7 @@ import { Divider } from '@shared/ui/Divider/Divider';
 import { Row } from '@shared/ui/Row';
 import { getProfileElements } from '../../model/consts/getProfileElements';
 import { ProfileListItem } from '../ProfileListItem/ProfileListItem';
-import LogoutIcon from '@shared/assets/icons/logout.svg';
+import {ReactComponent as LogoutIcon} from '@shared/assets/icons/logout.svg';
 import { getProfileSocialIcons } from '../../model/consts/getProfileSocialIcons';
 import { AppLink } from '@shared/ui/AppLink';
 import { useLogoutMutation } from '@features/AuthByUsername';

@@ -2,9 +2,8 @@ import { classNames } from '@shared/lib/classNames/classNames';
 import cls from './HeaderMain.module.scss';
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
-import { LangSwitcher } from '@widgets/LangSwitcher/ui/LangSwitcher';
-import { Link } from 'react-router-dom';
 import { Button } from '@shared/ui/Button';
+import { AppLink } from '@shared/ui/AppLink';
 import { Routes } from '@shared/const/router';
 
 interface HeaderMainProps {
@@ -16,25 +15,14 @@ export const HeaderMain = memo(({ className }: HeaderMainProps) => {
 
     return (
         <div className={classNames(cls.HeaderMain, {}, [className])}>
-            <div className={cls.container}>
-                <LangSwitcher />
-                <div>{t("Logo заглушка")}</div>
-                <ul>
-                    <li>
-                        <h2>{t('Часто задаваемые вопросы')}</h2>
-                    </li>
-                    <li>
-                        <h2>{t('О нас')}</h2>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <Link to={Routes.AUTH}>
-                    <Button className={cls.btn} variant='filled' padding='m_p'>
-                        {t('Войти')}
-                    </Button>
-                </Link>
-            </div>
+            <h3 className={cls.title}>
+                {t('Основная страница не сделана. В разработке, перейдите к регистрации')}
+            </h3>
+            <Button variant='outlined'>
+                <AppLink to={Routes.AUTH} className={cls.btn} >
+                    {t('Войти')}
+                </AppLink>
+            </Button>
         </div>
     );
 });

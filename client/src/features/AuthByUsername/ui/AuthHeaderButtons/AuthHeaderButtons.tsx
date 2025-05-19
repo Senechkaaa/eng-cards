@@ -8,13 +8,13 @@ import { Divider } from '@shared/ui/Divider/Divider';
 interface AuthHeaderButtonsProps {
     className?: string;
     setIsLoginForm: (value: boolean) => void;
-    isLoginForm: boolean
+    isLoginForm: boolean;
 }
 
 export const AuthHeaderButtons = memo((props: AuthHeaderButtonsProps) => {
     const { t } = useTranslation();
     const { setIsLoginForm, isLoginForm, className } = props;
-    
+
     return (
         <>
             <div className={classNames(cl.AuthHeaderButtons, {}, [className])}>
@@ -36,7 +36,7 @@ export const AuthHeaderButtons = memo((props: AuthHeaderButtonsProps) => {
                     {t('Вход')}
                 </Button>
             </div>
-            <Button>{t('Войти через Google')}</Button>
+            <Button className={cl.btn_google} >{t('Войти через Google')}</Button>
             <Button>{t('Войти через Facebook')}</Button>
             <Divider className={cl.divider}>{t('Или адрес эл.почты')}</Divider>
         </>

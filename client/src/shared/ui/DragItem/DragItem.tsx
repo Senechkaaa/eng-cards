@@ -1,6 +1,6 @@
 import { classNames } from '@shared/lib/classNames/classNames';
 import cls from './DragItem.module.scss';
-import { memo, ReactNode } from 'react';
+import { CSSProperties, memo, ReactNode } from 'react';
 import { DndContext, useDraggable } from '@dnd-kit/core';
 
 interface DragItemProps {
@@ -15,14 +15,14 @@ export const DragItem = memo((props: DragItemProps) => {
         id: id,
     });
 
-    const style = transform
+    const style: CSSProperties = transform
         ? {
               transform: `translate3d(${-transform.x}px, ${transform.y}px, 0) rotate(${
                   transform.x * 0.05
               }deg) rotateY(180deg)`,
               visibility: 'visible',
           }
-        : undefined;
+        : {};
 
     return (
         <DndContext>

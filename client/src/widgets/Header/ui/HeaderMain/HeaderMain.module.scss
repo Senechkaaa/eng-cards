@@ -1,18 +1,11 @@
-.container {
+.HeaderMain {
+    margin-top: 15px;
     display: flex;
     align-items: center;
-
-    ul {
-        display: flex;
-        align-content: center;
-    }
-
-    li {
-        margin-left: 20px;
-        list-style: none;
-    }
+    justify-content: center;
+    flex-direction: column;
 }
 
-.btn {
-    background: blue;
+.title {
+    margin-bottom: 5px;
 }
