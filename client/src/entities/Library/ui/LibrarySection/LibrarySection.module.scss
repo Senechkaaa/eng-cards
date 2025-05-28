@@ -1,0 +1,16 @@
+.LibrarySection {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+.section {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+}
+
+.title {
+    font-weight: 700;
+    padding: 10px;
+}

@@ -18,6 +18,10 @@
     justify-content: center;
 }
 
+.justifyAround {
+    justify-content: space-around;
+}
+
 .alignStart {
     align-items: flex-start;
 }
@@ -36,4 +40,8 @@
 
 .directionColumn {
     flex-direction: column;
+}
+
+.width {
+    width: 100%;
 }

@@ -1,0 +1,79 @@
+.LibrarySectionItem {
+    width: 155px;
+    margin: 5px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid var(--light-gray-color);
+    background-color: #fff;
+}
+
+.img_conainer {
+    height: 140px;
+}
+
+.info_wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 3px;
+    filter: brightness(80%);
+}
+
+.info_container {
+    background-color: #fff;
+    min-height: 65px;
+    padding: 0 10px 15px;
+}
+
+.info_course {
+    position: absolute;
+    bottom: 4px;
+}
+
+.rating {
+    margin-right: 5px;
+}
+
+.icon {
+    margin-left: 2px;
+}
+
+.title {
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.1em;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.level {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+
+.easyLevel {
+    background-color: rgba(87, 197, 65, 0.75);
+}
+
+.mediumLevel {
+    background-color: rgba(240, 112, 44, 0.75);
+}
+
+.hardLevel {
+    background-color: rgba(24, 184, 205, 0.75);
+}

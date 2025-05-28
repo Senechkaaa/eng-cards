@@ -13,19 +13,11 @@ import (
 	"log"
 )
 
-//DROP TABLE IF EXISTS author CASCADE;
-//DROP TABLE IF EXISTS book CASCADE;
-//DROP TABLE IF EXISTS book_authors CASCADE;
-
 func main() {
 
 	if err := initConfig(); err != nil {
 		logrus.Fatalf("err init config: %s", err)
 	}
-
-	//if err := godotenv.Load(); err != nil {
-	//	logrus.Fatalf("err load env file: %s", err.Error())
-	//}
 	db, err := repository.NewPostgresDB(repository.Config{
 		Host:     viper.GetString(`db.host`),
 		Port:     viper.GetString(`db.port`),

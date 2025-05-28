@@ -28,9 +28,9 @@ export const LoginForm = () => {
         resolver: zodResolver<ValidationAuthSchemaType>(validationAuthSchema),
     });
 
-    console.log(errors)
     const onLogin = useCallback(
         (email: string, password: string) => {
+            console.log(email, password)
             login({ email, password });
         },
         [login],
